@@ -7,11 +7,32 @@ export const routes: Routes = [
     },
     {
         path: 'user',
+        loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent),
         children: [
             {
-                path: 'home',
-                loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
-            }
+                path: 'cards',
+                loadComponent: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent),
+            },
+            // {
+            //     path: 'transactions',
+            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            // },
+            // {
+            //     path: 'beneficiaries',
+            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            // },
+            // {
+            //     path: 'profile',
+            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            // },
+            // {
+            //     path: 'services',
+            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            // },
+            // {
+            //     path: '**',
+            //     loadChildren: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
+            // },
         ]
     },
     {
