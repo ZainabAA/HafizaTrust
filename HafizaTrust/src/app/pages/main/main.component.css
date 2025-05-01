@@ -1,0 +1,17 @@
+.buttons{
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.buttons button{
+    margin: 10px;
+}
+
+.main-content{
+    height: 80vh;
+}
+
+.footer{
+    height: 30vh;
+    background-color: var(--secondary-color);
+}
