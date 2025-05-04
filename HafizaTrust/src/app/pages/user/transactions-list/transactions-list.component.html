@@ -1,0 +1,45 @@
+<div class="main">
+        <form class="form">
+            <mat-form-field>
+                <mat-label>amount</mat-label>
+                <input [formControl]="amountForm"
+                    matInput
+                    class="search"
+                    #search
+                    type="number"
+                    (input)="filterByAmount()"
+                /></mat-form-field>
+            <mat-form-field>
+                <mat-label>Created at</mat-label>
+                <input [formControl]="dateForm"
+                matInput [matDatepicker]="picker" (dateChange)="filterByDate()">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select [formControl]="typeForm"
+                    (selectionChange)="filterByType()">
+                    <mat-option [value]="null">none</mat-option>
+                    <mat-option value="deposit">deposit</mat-option>
+                    <mat-option value="transfer">transfer</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+@for (transaction of filteredTransactions; track $index) {
+    <mat-accordion>
+        <mat-expansion-panel hideToggle class="card-item">
+          <mat-expansion-panel-header class="expansion-header">
+            <mat-panel-title>{{transaction.amount}}</mat-panel-title>
+            <mat-panel-description>{{transaction.createdAt | date: 'shortDate'}}</mat-panel-description>
+            <p>{{transaction.type}}</p>
+          </mat-expansion-panel-header>
+          <div>
+            <p>from: {{transaction.from}}</p>
+            <p>to: {{transaction.to}}</p>
+          </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+}
+</div>

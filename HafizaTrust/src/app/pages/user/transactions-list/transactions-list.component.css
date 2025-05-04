@@ -1,0 +1,15 @@
+.main{
+    margin: 10px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: lightgray;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.card-item{
+    margin-bottom: 10px;
+}
