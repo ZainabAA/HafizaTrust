@@ -10,14 +10,14 @@ import { catchError, throwError } from 'rxjs';
 export class TransactionsService extends BaseService {
 
   baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/transactions/';
-  headerAuth = {'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODExZDYxOGE1ZmJjOGRmZTZhOTI0ODYiLCJpYXQiOjE3NDU5OTkzODQsImV4cCI6MTc1NjM2NzM4NH0.kLfoZLkC0omkVZhxXN7Jo8dLp-v3wAQ6p4VWObyiJ6A'}
+  headerAuth = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODExZDYxOGE1ZmJjOGRmZTZhOTI0ODYiLCJpYXQiOjE3NDU5OTkzODQsImV4cCI6MTc1NjM2NzM4NH0.kLfoZLkC0omkVZhxXN7Jo8dLp-v3wAQ6p4VWObyiJ6A'}
   
   constructor(_httpClient: HttpClient) {
     super(_httpClient)
    }
 
    getTransactions(){
-    this.get<Transaction[]>(`${this.baseUrl}my`, {}, this.headerAuth)
+    return this.get<Transaction[]>(`${this.baseUrl}my`, {}, this.headerAuth)
     .pipe(
       catchError((error) => {
         console.error('getTransactions failed:', error);
@@ -27,7 +27,7 @@ export class TransactionsService extends BaseService {
    }
 
    withdraw(amount: number){
-    this.put<PostResponse, PostRequest>(`${this.baseUrl}withdraw`, {amount: amount}, {}, this.headerAuth)
+    return this.put<PostResponse, PostRequest>(`${this.baseUrl}withdraw`, {amount: amount}, {}, this.headerAuth)
     .pipe(
       catchError((error) => {
         console.error('withdraw failed:', error);
@@ -37,7 +37,7 @@ export class TransactionsService extends BaseService {
    }
 
    deposit(amount: number){
-    this.put<PostResponse, PostRequest>(`${this.baseUrl}deposit`, {amount: amount}, {}, this.headerAuth)
+    return this.put<PostResponse, PostRequest>(`${this.baseUrl}deposit`, {amount: amount}, {}, this.headerAuth)
     .pipe(
       catchError((error) => {
         console.error('deposit failed:', error);
@@ -47,7 +47,7 @@ export class TransactionsService extends BaseService {
    }
 
    transfer(amount: number, user: string){
-    this.put<PostResponse, any>(`${this.baseUrl}deposit/${user}`,
+    return this.put<PostResponse, any>(`${this.baseUrl}deposit/${user}`,
       {amount: amount, username: user}, {}, this.headerAuth)
     .pipe(
       catchError((error) => {
