@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, RouterLink, RouterLinkActive, RouterModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

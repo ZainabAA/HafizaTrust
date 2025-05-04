@@ -1,0 +1,15 @@
+<div class="notes-grid">
+    @for (note of notes; track $index) {
+    <div class="note-card">
+        <a [routerLink]="[note._id]">
+        <h2>{{note.title}}</h2>
+        <p>{{note.body}}</p>
+        <div class="user-data">
+            <!-- <img src="{{note.user.image}}" /> -->
+            <p>User Name: {{note.user.userName}}</p>
+        </div>
+        <p>topics: {{note.topic}}</p>
+        </a>
+    </div>
+    }
+    </div>

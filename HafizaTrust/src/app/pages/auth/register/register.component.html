@@ -1,0 +1,26 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  
+    <label for="userName">User Name:</label>
+    <input type="text" id="userName" formControlName="userName" />
+    <app-form-error
+      [control]="registerForm.get('userName')"
+      fieldName="userName"
+    ></app-form-error>
+  
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password" />
+    <app-form-error
+      [control]="registerForm.get('password')"
+      fieldName="Password"
+    ></app-form-error>
+  
+    <label for="image">Image:</label>
+    <input type="file" id="image" formControlName="image" />
+    <app-form-error
+      [control]="registerForm.get('image')"
+      fieldName="Image"
+    ></app-form-error>
+  
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+  
