@@ -1,0 +1,21 @@
+<div class="main">
+@for (transaction of transactions; track $index) {
+    <mat-accordion>
+        <mat-expansion-panel hideToggle class="card-item">
+          <mat-expansion-panel-header class="expansion-header">
+            <mat-panel-title>{{transaction.amount}}</mat-panel-title>
+            <mat-panel-description>{{transaction.createdAt | date: 'shortDate'}}</mat-panel-description>
+            <p>{{transaction.type}}</p>
+          </mat-expansion-panel-header>
+          <div>
+            <p>from: {{transaction.from}}</p>
+            <p>to: {{transaction.to}}</p>
+          </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <!-- <mat-card class="card-item" appearance="outlined" toggle>
+        <mat-card-header>{{transaction.type}}</mat-card-header>
+        <mat-card-content>{{transaction.createdAt | date: 'shortDate' }}</mat-card-content>
+    </mat-card> -->
+}
+</div>
