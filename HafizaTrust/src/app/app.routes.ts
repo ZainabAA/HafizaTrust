@@ -15,24 +15,24 @@ export const routes: Routes = [
             },
             // {
             //     path: 'transactions',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            //     loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
             // },
             // {
             //     path: 'beneficiaries',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            //     loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
             // },
-            // {
-            //     path: 'profile',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
-            // },
+            {
+                path: 'userProfile',
+                loadComponent: () => import('./pages/user/user-profile/user-profile.component').then(c => c.UserProfileComponent),
+            },
             // {
             //     path: 'services',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
+            //     loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
             // },
-            // {
-            //     path: '**',
-            //     loadChildren: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
-            // },
+            {
+                path: '**',
+                loadComponent: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
+            },
         ]
     },
     {
