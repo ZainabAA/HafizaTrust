@@ -6,12 +6,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect, MatSelectModule} from '@angular/material/select';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
   imports: [MatExpansionModule, DatePipe, MatIconModule, MatInputModule,
-    MatDatepickerModule, MatSelectModule
+    MatDatepickerModule, MatSelectModule, ReactiveFormsModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './transactions-list.component.html',
@@ -42,40 +43,57 @@ export class TransactionsListComponent {
   ];
 
   filteredTransactions = this.transactions;
-  typeSelect = null;
 
-  changeFilteredTrans(search: string) {
-    if (!search) {
+  dateForm = new FormControl<Date | null>(null);
+  amountForm = new FormControl<number | null>(null)
+  typeForm = new FormControl<string | null>(null);
+
+  filterByAmount() {
+    this.dateForm.setValue(null);
+    this.typeForm.setValue(null);
+    if (!this.amountForm.value) {
       this.filteredTransactions = this.transactions;
       return;
     }
 
     this.filteredTransactions = this.transactions.filter((trans) =>
-      trans.amount.toString().includes(search)
+      trans.amount.toString().includes(this.amountForm.value?.toString() || '')
     );
   }
 
-  filterByDate(event: MatDatepickerInputEvent<Date>){
-    if (!event.value) {
+  filterByDate(){
+    this.amountForm.setValue(null);
+    this.typeForm.setValue(null);
+    if (!this.dateForm) {
       this.filteredTransactions = this.transactions;
       return;
     }
     this.filteredTransactions = this.transactions.filter((trans) =>
-      trans.createdAt.getFullYear() === event.value?.getFullYear()
-      && trans.createdAt.getMonth() === event.value?.getMonth()
-      && trans.createdAt.getDay() === event.value?.getDay()
+      trans.createdAt.getFullYear() === this.dateForm.value?.getFullYear()
+      && trans.createdAt.getMonth() === this.dateForm.value?.getMonth()
+      && trans.createdAt.getDay() === this.dateForm.value?.getDay()
     );
   }
 
-  filterByType(val: string){
+  filterByType(){
+    this.dateForm.setValue(null);
+    this.amountForm.setValue(null);
     this.transactions.forEach(t => console.log(t.type));
-    console.log(val);
-    if(!val){
+    console.log(this.typeForm.value);
+    if(!this.typeForm.value){
       this.filteredTransactions = this.transactions;
       return;
     }
+    
     this.filteredTransactions = this.transactions.filter((trans) => 
-      trans.type === val
+      trans.type === this.typeForm.value
     )
+  }
+
+  resetFilter(){
+    this.filteredTransactions = this.transactions;
+    this.filterByAmount();
+    this.filterByDate();
+    this.filterByType();
   }
 }
