@@ -1,5 +1,29 @@
 <div class="main">
-@for (transaction of transactions; track $index) {
+        <div class="form">
+            <mat-form-field>
+                <input matInput
+                    class="search"
+                    #search
+                    type="number"
+                    (input)="changeFilteredTrans(search.value)"
+                /></mat-form-field>
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" (dateChange)="filterByDate($event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Favorite food</mat-label>
+                <mat-select (selectionChange)="filterByType($event.value)">
+                    <mat-option [value]="null">none</mat-option>
+                    <mat-option value="deposit">deposit</mat-option>
+                    <mat-option value="transfer">transfer</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+@for (transaction of filteredTransactions; track $index) {
     <mat-accordion>
         <mat-expansion-panel hideToggle class="card-item">
           <mat-expansion-panel-header class="expansion-header">
@@ -13,9 +37,5 @@
           </div>
         </mat-expansion-panel>
     </mat-accordion>
-    <!-- <mat-card class="card-item" appearance="outlined" toggle>
-        <mat-card-header>{{transaction.type}}</mat-card-header>
-        <mat-card-content>{{transaction.createdAt | date: 'shortDate' }}</mat-card-content>
-    </mat-card> -->
 }
 </div>
