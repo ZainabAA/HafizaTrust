@@ -1,12 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
 /* @use '@angular/material' as mat;
+*/
 
 @import "tailwindcss";
 
-:host{
-    --primary-color: #ffff;
-    --secondary-color: #0000;
+:root{
+    --primary: #6B9080;
+    --secondary: #A4C3B2;
+    --tertiary: #F5EDD3;
+    --ht-grey: #35393C;
+    --ht-light: #F6FFF8;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } 
+
+.bg-primary{
+    background-color: var(--primary)
+}
+.bg-secondary{
+    background-color: var(--secondary)
+}
+.bg-tertiary{
+    background-color: var(--tertiary)
+}
+.bg-grey{
+    background-color: var(--ht-grey)
+}
+.bg-light
+{
+    background-color: var(--ht-light)
+}
+.text-primary{
+    color: var(--primary)
+}
+.text-secondary{
+    color: var(--secondary)
+}
+.text-tertiary{
+    color: var(--tertiary)
+}
+.text-grey{
+    color: var(--ht-grey)
+}
+.text-light
+{
+    color: var(--ht-light)
+}
+
+.main
+{
+    background-color: var(--primary);
+}
+a{
+    text-decoration: none;
+    color: var(--secondary);
+}
+ul{
+    margin: 5px
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
