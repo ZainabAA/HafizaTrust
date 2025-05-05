@@ -23,10 +23,10 @@ export const routes: Routes = [
                 path: 'cards',
                 loadComponent: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent),
             },
-            // {
-            //     path: 'transactions',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
-            // },
+            {
+                path: 'transactions',
+                loadComponent: () => import('./pages/user/transactions-list/transactions-list.component').then(c => c.TransactionsListComponent)
+            },
             // {
             //     path: 'beneficiaries',
             //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)

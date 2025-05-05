@@ -1,18 +1,26 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-    <label for="userName">User Name:</label>
-    <input type="text" id="userName" formControlName="userName" />
-    <app-form-error
-      [control]="loginForm.get('userName')"
-      fieldName="userName"
-    ></app-form-error>
-  
-    <label for="password">Password:</label>
-    <input type="password" id="password" formControlName="password" />
-    <app-form-error
-      [control]="loginForm.get('password')"
-      fieldName="Password"
-    ></app-form-error>
-  
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+<mat-card>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput
+             formControlName="userName"
+             required>
+      @if (loginForm.get('username')?.invalid) {
+        <mat-error>Please enter your username</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput
+             formControlName="password"
+             required>
+      @if (loginForm.get('password')?.invalid) {
+        <mat-error>Please enter your password</mat-error>
+      }
+    </mat-form-field>
+
+    <button type="submit" [disabled]="loginForm.invalid" mat-raised-button color="primary">Login</button>
   </form>
+</mat-card>
+
   
