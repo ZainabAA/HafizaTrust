@@ -1,0 +1,10 @@
+<div>
+    @if (note) {
+        <h1>{{note.title}}</h1>
+        <h3>{{note.body}}</h3>
+        <p>{{note.topic}}</p>
+    }
+    @else if(error) {
+        <p>{{error}}</p>
+    }
+</div>

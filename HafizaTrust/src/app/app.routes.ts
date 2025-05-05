@@ -5,6 +5,16 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./pages/main/main.component').then(c => c.MainComponent)
     },
+    { 
+        path: 'login',
+        loadComponent: () => import('./pages/auth/login/login.component').then(c => c.LoginComponent)
+    },
+    { 
+        path: 'register',
+        loadComponent: () => import('./pages/auth/register/register.component').then(c => c.RegisterComponent)
+    },
+    // { path: 'notes', component: NotesComponent },
+    // { path: 'notes/:id', component: NoteDetailsComponent },
     {
         path: 'user',
         loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent),

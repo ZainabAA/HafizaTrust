@@ -1,0 +1,11 @@
+@if (control!.errors && control!.dirty) { @if (control!.errors['required']) {
+    <p>{{ fieldName }} is required.</p>
+    } @if (control!.errors['minlength']) {
+    <p>
+      {{ fieldName }} must be at least
+      {{ control!.errors["minlength"].requiredLength }} characters.
+    </p>
+    } @if (control!.errors['userName']) {
+    <p>{{ fieldName }} must be a valid user Name.</p>
+    } }
+    
