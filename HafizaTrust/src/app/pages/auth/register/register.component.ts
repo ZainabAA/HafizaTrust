@@ -37,21 +37,22 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    const formData = new FormData()
+    const formData = new FormData();
     formData.append('username', this.registerForm.get('username')?.value);
     formData.append('password', this.registerForm.get('password')?.value);
-    formData.append('image', this.registerForm.get('image')?.value);
-
+  
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+  
     this.authService.register(formData).subscribe({
       next: (res) => {
-        document.cookie = `token=${res.token}`
+        document.cookie = `token=${res.token}`;
         this.router.navigate(['/']);
-        console.log(res);
       },
-      error: (error) => {
-        console.error(error);
-        
-      }
+      error: (err) => {
+        console.error(err);
+      },
     });
     console.log('Form Data:', this.registerForm.value);
   }
@@ -71,11 +72,14 @@ export class RegisterComponent {
 
       this.selectedImage = file;
       console.log('Selected image:', this.selectedImage);
-      // You can now send this file to FormData or preview it
     }
   }
 
   closeModal() {
     this.closed.emit();
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 }
