@@ -16,7 +16,7 @@ import { AuthRequest, AuthResponse } from '../../interfaces/auth/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
-  private readonly baseUrl = 'ttps://react-bank-project.eapi.joincoded.com/';
+  private readonly baseUrl = 'https://react-bank-project.eapi.joincoded.com/';
 
   constructor(_http: HttpClient) {
     super(_http);

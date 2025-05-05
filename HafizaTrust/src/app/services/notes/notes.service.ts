@@ -8,7 +8,7 @@ import { Note } from '../../interfaces/note';
   providedIn: 'root'
 })
 export class NotesService extends BaseService {
-  private readonly baseUrl = 'https://task-react-auth-backend.eapi.joincoded.com/api/';
+  private readonly baseUrl = 'https://react-bank-project.eapi.joincoded.com/';
 
   constructor(_http: HttpClient) { 
     super(_http)
