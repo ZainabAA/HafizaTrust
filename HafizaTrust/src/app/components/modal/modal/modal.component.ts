@@ -1,4 +1,4 @@
-import { Component, inject, model } from '@angular/core';
+import { Component, inject, Input, model } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -13,10 +13,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
-
-interface transferData {
-  amount: number,
-  username: string;
+interface InputType {
+  dataName: string;
+  dataType: 'select' | 'text' | 'number';
+  options?: string[];
+  data: any
 }
 
 @Component({
@@ -30,11 +31,17 @@ interface transferData {
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })
-export class ModalComponent {
-  readonly dialogRef = inject(MatDialogRef<ModalComponent>);
-  readonly data = inject<transferData>(MAT_DIALOG_DATA);
-  readonly transferModel = model(this.data);
+export class ModalComponent<T> {
+  readonly dialogRef = inject(MatDialogRef<ModalComponent<T>>);
+  readonly data = inject<any>(MAT_DIALOG_DATA);
+  readonly inputModel = model(this.data);
+  // @Input() dataInputTypes!: InputType[];
+  ;
 
+  constructor() {
+    console.log(this.inputModel);
+    
+  }
   beneficiaries = [
     {
       "_id": "6661df625f25f11b001ca372",

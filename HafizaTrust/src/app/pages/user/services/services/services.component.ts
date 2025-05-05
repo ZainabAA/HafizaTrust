@@ -13,6 +13,11 @@ import {
 import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from '../../../../components/modal/modal/modal.component';
 
+interface transferData {
+  amount: number;
+  username: string;
+}
+
 @Component({
   selector: 'app-services',
   standalone: true,
@@ -105,9 +110,22 @@ export class ServicesComponent {
       "balance": 0
   },
   ]
+
+  modalInput = [
+    {dataName: 'username',
+      dataType: 'select',
+      options: this.beneficiaries.map(b => b.username),
+      data: this.username()
+    },
+    {dataName: 'amount',
+      dataType: 'number',
+      data: this.amount()
+    }
+  ]
+
   transfer(){
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: {username: this.username(), amount: this.amount()},
+      data: this.modalInput,
     });
 
     dialogRef.afterClosed().subscribe(result => {
