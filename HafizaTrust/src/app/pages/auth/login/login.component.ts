@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card'
 import { AuthService } from '../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
 
   private _authService = inject(AuthService);
+  private _router = inject(Router)
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
@@ -37,7 +39,9 @@ export class LoginComponent {
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
 
-      console.log(res);
+      document.cookie = `token=${res.token}`
+        this._router.navigate(['/']);
+        console.log(res);
       
     })
   }
