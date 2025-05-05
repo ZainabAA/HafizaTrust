@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use 'm3-theme';
+@include mat.core();
+
+
+@import "tailwindcss";
+$my-theme: mat.define-theme((
+ color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+  ),
+));
+:host{
+    --primary-color: #ffff;
+    --secondary-color: #0000;
+}
+
+html{
+    @include mat.core-theme(m3-theme.$dark-theme);
+    @include mat.button-theme(m3-theme.$dark-theme, $color-variant: primary);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+  }
