@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card'
 import { AuthService } from '../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +25,12 @@ export class LoginComponent {
   loginForm!: FormGroup;
 
   private _authService = inject(AuthService);
+  private router = inject(Router)
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -36,9 +38,10 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
-
+      document.cookie = `token=${res.token}`
+      document.cookie = `username=${this.loginForm.get('username')?.value}`;
+      this.router.navigate(['/admin']);
       console.log(res);
-      
     })
   }
 }

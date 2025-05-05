@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
     {
@@ -13,7 +14,6 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./pages/auth/register/register.component').then(c => c.RegisterComponent)
     },
-    // { path: 'notes', component: NotesComponent },
     // { path: 'notes/:id', component: NoteDetailsComponent },
     {
         path: 'user',
@@ -44,6 +44,11 @@ export const routes: Routes = [
             //     loadChildren: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
             // },
         ]
+    },
+    {
+        path: 'admin',
+        canActivate:[roleGuard],
+        loadComponent: () => import('./pages/admin/admin.component').then(c => c.AdminComponent)
     },
     {
         path: '**',

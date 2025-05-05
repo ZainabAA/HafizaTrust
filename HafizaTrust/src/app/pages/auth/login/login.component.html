@@ -12,6 +12,7 @@
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input matInput
+              type="password"
              formControlName="password"
              required>
       @if (loginForm.get('password')?.invalid) {
