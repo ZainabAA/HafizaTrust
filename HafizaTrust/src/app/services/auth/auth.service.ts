@@ -22,8 +22,8 @@ export class AuthService extends BaseService {
     super(_http);
   }
 
-  login(data: FormData): Observable<AuthResponse> {
-    return this.post<AuthResponse, FormData>(
+  login(data: AuthRequest): Observable<AuthResponse> {
+    return this.post<AuthResponse, AuthRequest>(
       `${this.baseUrl}/login`,
       data
     ).pipe(

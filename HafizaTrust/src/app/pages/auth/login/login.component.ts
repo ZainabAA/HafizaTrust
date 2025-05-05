@@ -17,7 +17,6 @@ import { AuthService } from '../../../services/auth/auth.service';
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCardModule],
-  // imports: [ReactiveFormsModule, FormErrorComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -28,13 +27,16 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      userName: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onSubmit() {
+    console.log(this.loginForm.value);
+    
     this._authService.login(this.loginForm.value).subscribe(res=>{
+
       console.log(res);
       
     })
