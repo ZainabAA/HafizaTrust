@@ -1,0 +1,34 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput
+           formControlName="username"
+           required>
+    @if (registerForm.get('username')?.invalid) {
+      <mat-error>Please enter a username</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput
+           formControlName="password"
+           required>
+    @if (registerForm.get('password')?.invalid) {
+      <mat-error>Please enter a password</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Profile image</mat-label>
+    <input matInput
+           formControlName="image"
+           required>
+    @if (registerForm.get('image')?.invalid) {
+      <mat-error>Please upload an image</mat-error>
+    }
+  </mat-form-field>
+    
+  
+    <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Register</button>
+  </form>
+  
