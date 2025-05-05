@@ -13,6 +13,7 @@ import {
 import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from '../../../../components/modal/modal/modal.component';
 import { InputType } from '../../../../components/modal/modal/modal.component';
+import { TransactionsService } from '../../../../services/transactions/transactions.service';
 
 @Component({
   selector: 'app-services',
@@ -31,6 +32,7 @@ export class ServicesComponent {
   readonly transferUsername = model('');
   readonly withdrawAmount = model(0);
   readonly dialog = inject(MatDialog);
+  transactionsService = inject(TransactionsService);
 
   beneficiaries = [
     {
@@ -106,6 +108,15 @@ export class ServicesComponent {
       "image": "media/1725326229212R.png",
       "balance": 0
   },
+  {
+    "_id": "6811d618a5fbc8dfe6a92486",
+    "username": "zainab",
+    "balance": 50
+  },{
+    "username": "heba",
+    "image": "media/1730377698282qrcode_s.esheaq.onl.png",
+    "balance": 199100
+}
   ]
 
   transferInput = [
@@ -140,7 +151,18 @@ export class ServicesComponent {
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
 
         this.transferAmount.set(amountRes);
-        this.transferUsername.set(usernameRes)
+        this.transferUsername.set(usernameRes);
+
+        this.transactionsService.transfer(this.transferAmount(), this.transferUsername())
+          .subscribe({
+            next: (res) => {
+              this.transferAmount.set(0);
+              this.transferUsername.set('');
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          });
       }
     });
   }
@@ -156,6 +178,17 @@ export class ServicesComponent {
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
         this.withdrawAmount.set(amountRes);
         
+        this.transactionsService.withdraw(this.withdrawAmount())
+          .subscribe({
+            next: (res) => {
+              this.withdrawAmount.set(0);
+              console.log(res);
+              
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          });
       }
     });
   }
