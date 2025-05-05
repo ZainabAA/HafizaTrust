@@ -4,8 +4,9 @@
           <mat-expansion-panel-header class="expansion-header">
             <mat-panel-title>{{beneficiary.username}}</mat-panel-title>
           </mat-expansion-panel-header>
-          <div>
+          <div class="desc">
             <mat-panel-description>{{beneficiary._id}}</mat-panel-description>
+            <button mat-raised-button (click)="transfer()">Transfer</button>
             <!-- <img src="{{beneficiary.image}}" /> -->
           </div>
         </mat-expansion-panel>

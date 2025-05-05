@@ -1,3 +1,9 @@
 .card-item{
     margin-bottom: 10px;
 }
+
+.desc{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

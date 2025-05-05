@@ -3,9 +3,3 @@ export interface Beneficiary {
     username: string;
     image: string;
 }
-
-export interface User {
-    username: string;
-    image: string;
-    balance: number;
-}
