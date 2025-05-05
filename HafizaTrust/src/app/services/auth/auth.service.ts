@@ -16,7 +16,7 @@ import { AuthRequest, AuthResponse } from '../../interfaces/auth/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
-  private readonly baseUrl = 'https://react-bank-project.eapi.joincoded.com/';
+  private readonly baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/auth';
 
   constructor(_http: HttpClient) {
     super(_http);
@@ -34,8 +34,8 @@ export class AuthService extends BaseService {
     );
   }
 
-  register(data: AuthRequest): Observable<AuthResponse> {
-    return this.post<AuthResponse, AuthRequest>(
+  register(data: FormData): Observable<AuthResponse> {
+    return this.post<AuthResponse, FormData>(
       `${this.baseUrl}/register`,
       data
     ).pipe(

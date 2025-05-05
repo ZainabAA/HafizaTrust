@@ -1,27 +1,35 @@
 <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
   
-    <label for="userName">User Name:</label>
-    <input type="text" id="userName" formControlName="userName" />
-    <app-form-error
-      [control]="registerForm.get('userName')"
-      fieldName="userName"
-    ></app-form-error>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput
+           formControlName="username"
+           required>
+    @if (registerForm.get('username')?.invalid) {
+      <mat-error>Please enter a username</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput
+           formControlName="password"
+           required>
+    @if (registerForm.get('password')?.invalid) {
+      <mat-error>Please enter a password</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Profile image</mat-label>
+    <input matInput
+           formControlName="image"
+           required>
+    @if (registerForm.get('image')?.invalid) {
+      <mat-error>Please upload an image</mat-error>
+    }
+  </mat-form-field>
+    
   
-    <label for="password">Password:</label>
-    <input type="password" id="password" formControlName="password" />
-    <app-form-error
-      [control]="registerForm.get('password')"
-      fieldName="Password"
-    ></app-form-error>
-  
-    <label for="image">Image:</label>
-    <input type="file" id="image" formControlName="image" />
-    <app-form-error
-      [control]="registerForm.get('image')"
-      fieldName="Image"
-    ></app-form-error>
-  
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Register</button>
   </form>
    -->
    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="closeModal()">

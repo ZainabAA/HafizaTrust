@@ -1,7 +1,7 @@
 export interface AuthRequest {
-    userName: string;
+    username: string;
     password: string;
-    image: string;
+    image?: string;
   }
   
   export interface AuthResponse {

@@ -1,0 +1,12 @@
+.services-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.services-main button{
+    width: 150px;
+    height: 75px;
+    margin: 30px;
+}
