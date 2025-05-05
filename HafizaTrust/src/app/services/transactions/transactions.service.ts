@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient } from '@angular/common/http';
 import { PostRequest, PostResponse, Transaction } from '../../data/transaction';
-import { catchError, throwError } from 'rxjs';
+import { catchError, Observable, throwError, map } from 'rxjs';
+import { Beneficiary, User } from '../../data/beneficiary';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,24 @@ export class TransactionsService extends BaseService {
         return throwError(() => error);
       })
     );
+   }
+
+   getBeneficiaries(){
+    return this.getTransactions().pipe(
+      map((res: Transaction[]) => {
+        return res.map((b: Transaction) => {
+          return { _id: b.to,
+          ...this.get<User>(
+            `https://react-bank-project.eapi.joincoded.com/mini-project/api/auth/user/${b._id}`, 
+            {}, this.headerAuth).subscribe({
+              next: (res) => {
+                return {username: res.username, image: res.image};
+              }
+            })
+          }
+        })
+      })
+    )
    }
 
    withdraw(amount: number){
