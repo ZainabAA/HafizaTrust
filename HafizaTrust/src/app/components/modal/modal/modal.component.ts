@@ -13,7 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
-interface InputType {
+export interface InputType {
   dataName: string;
   dataType: 'select' | 'text' | 'number';
   options?: string[];

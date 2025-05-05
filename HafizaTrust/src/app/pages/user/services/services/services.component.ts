@@ -12,11 +12,7 @@ import {
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from '../../../../components/modal/modal/modal.component';
-
-interface transferData {
-  amount: number;
-  username: string;
-}
+import { InputType } from '../../../../components/modal/modal/modal.component';
 
 @Component({
   selector: 'app-services',
@@ -31,8 +27,9 @@ interface transferData {
   styleUrl: './services.component.css'
 })
 export class ServicesComponent {
-  readonly amount = model(0);
-  readonly username = model('');
+  readonly transferAmount = model(0);
+  readonly transferUsername = model('');
+  readonly withdrawAmount = model(0);
   readonly dialog = inject(MatDialog);
 
   beneficiaries = [
@@ -111,27 +108,54 @@ export class ServicesComponent {
   },
   ]
 
-  modalInput = [
+  transferInput = [
     {dataName: 'username',
       dataType: 'select',
       options: this.beneficiaries.map(b => b.username),
-      data: this.username()
+      data: this.transferUsername()
     },
     {dataName: 'amount',
       dataType: 'number',
-      data: this.amount()
+      data: this.transferAmount()
+    }
+  ]
+
+  withdrawnput = [
+    {
+      dataName: 'amount',
+      dataType: 'number',
+      data: this.withdrawAmount()
     }
   ]
 
   transfer(){
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: this.modalInput,
+      data: this.transferInput,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: InputType[]) => {
       console.log('The dialog was closed');
       if (result !== undefined) {
-        this.amount.set(result);
+        let usernameRes = result.filter(data => data.dataName === 'username')[0].data;
+        let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
+
+        this.transferAmount.set(amountRes);
+        this.transferUsername.set(usernameRes)
+      }
+    });
+  }
+
+  withdraw() {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: this.withdrawnput,
+    });
+
+    dialogRef.afterClosed().subscribe((result: InputType[]) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
+        this.withdrawAmount.set(amountRes);
+        
       }
     });
   }
