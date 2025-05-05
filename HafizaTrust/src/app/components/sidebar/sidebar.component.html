@@ -1,15 +1,18 @@
-<div class="sidebar d-flex flex-column justify-content-center align-items-start px-3">
+<div class="sidebar d-flex flex-column justify-content-center align-items-start p-3">
     <div>
         <a [routerLink]="['cards']" routerLinkActive="router-link-active">Cards</a>
     </div>
     <div>
         <a [routerLink]="['transactions']" routerLinkActive="router-link-active">Transactions</a>
     </div>
-    <ul>
-        <li></li>
-        <li></li>
-        <li><a [routerLink]="['cards']" routerLinkActive="router-link-active">Beneficiares</a></li>
-        <li><a [routerLink]="['cards']" routerLinkActive="router-link-active"><li>User Profile</a></li>
-        <li><a [routerLink]="['services']" routerLinkActive="router-link-active">Services</a></li>
-    </ul>
+    <div>
+        <a [routerLink]="['cards']" routerLinkActive="router-link-active">Beneficiares</a>
+    </div>
+    <div>
+        <a [routerLink]="['cards']" routerLinkActive="router-link-active">User Profile</a>
+    </div>
+    <div>
+        <a [routerLink]="['cards']" routerLinkActive="router-link-active">Services</a>
+    </div>
+    
 </div>
