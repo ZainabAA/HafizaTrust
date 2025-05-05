@@ -1,0 +1,35 @@
+<!-- <h2 mat-dialog-title>Hi {{data.name}}</h2> -->
+<mat-dialog-content>
+  <!-- <p>What's your favorite animal?</p> -->
+   @for (input of inputModel(); track $index) {
+    <mat-form-field>
+      <mat-label>{{input.dataName}}</mat-label>
+      @if (input.dataType === 'text' || input.dataType === 'number') {
+        <input matInput type={{input.dataType}} [(ngModel)]="input.data" />
+      }
+      @else if (input.dataType === 'select') {
+        <select matNativeControl required [(ngModel)]="input.data">
+          @for (opt of input.options; track $index) {
+              <option value="{{opt}}">{{opt}}</option>
+          }
+        </select>
+      }
+    </mat-form-field>
+   }
+  <!-- <mat-form-field>
+    <mat-label>amount</mat-label>
+    <input matInput [(ngModel)]="inputModel().amount" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>username</mat-label>
+    <select matNativeControl required [(ngModel)]="inputModel().username">
+        @for (beneficiary of beneficiaries; track $index) {
+            <option value="{{beneficiary.username}}">{{beneficiary.username}}</option>
+        }
+    </select>
+  </mat-form-field> -->
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="inputModel()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

@@ -35,10 +35,10 @@ export const routes: Routes = [
             //     path: 'profile',
             //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
             // },
-            // {
-            //     path: 'services',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
-            // },
+            {
+                path: 'services',
+                loadComponent: () => import('./pages/user/services/services/services.component').then(c => c.ServicesComponent)
+            },
             // {
             //     path: '**',
             //     loadChildren: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
