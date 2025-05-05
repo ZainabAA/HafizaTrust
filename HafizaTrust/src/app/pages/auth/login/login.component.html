@@ -5,7 +5,7 @@
       <input matInput
              formControlName="userName"
              required>
-      @if (loginForm.get('username')?.invalid) {
+      @if (loginForm.get('userName')?.invalid) {
         <mat-error>Please enter your username</mat-error>
       }
     </mat-form-field>

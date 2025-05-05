@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card'
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,8 @@ import { MatCardModule } from '@angular/material/card'
 export class LoginComponent {
   loginForm!: FormGroup;
 
+  private _authService = inject(AuthService);
+
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       userName: ['', [Validators.required]],
@@ -31,6 +34,9 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('Form Data:', this.loginForm.value);
+    this._authService.login(this.loginForm.value).subscribe(res=>{
+      console.log(res);
+      
+    })
   }
 }
