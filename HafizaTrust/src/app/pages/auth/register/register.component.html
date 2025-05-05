@@ -18,7 +18,7 @@
       <mat-error>Please enter a password</mat-error>
     }
   </mat-form-field>
-  <!-- <mat-form-field>
+  <mat-form-field>
     <mat-label>Profile image</mat-label>
     <input matInput
            formControlName="image"
@@ -26,7 +26,7 @@
     @if (registerForm.get('image')?.invalid) {
       <mat-error>Please upload an image</mat-error>
     }
-  </mat-form-field> -->
+  </mat-form-field>
     
   
     <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Register</button>

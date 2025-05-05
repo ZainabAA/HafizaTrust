@@ -29,7 +29,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      // image: ['', [Validators.required]]
+      image: ['', [Validators.required]]
     });
   }
 
@@ -37,7 +37,7 @@ export class RegisterComponent {
     const formData = new FormData()
     formData.append('username', this.registerForm.get('username')?.value);
     formData.append('password', this.registerForm.get('password')?.value);
-    formData.append('image','image');
+    formData.append('image', this.registerForm.get('image')?.value);
 
     this.authService.register(formData).subscribe({
       next: (res) => {
