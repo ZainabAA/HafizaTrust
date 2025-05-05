@@ -17,10 +17,10 @@ export const routes: Routes = [
                 path: 'transactions',
                 loadComponent: () => import('./pages/user/transactions-list/transactions-list.component').then(c => c.TransactionsListComponent)
             },
-            // {
-            //     path: 'beneficiaries',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
-            // },
+            {
+                path: 'beneficiaries',
+                loadComponent: () => import('./pages/user/beneficiaries/beneficiaries.component').then(c => c.BeneficiariesComponent)
+            },
             // {
             //     path: 'profile',
             //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
