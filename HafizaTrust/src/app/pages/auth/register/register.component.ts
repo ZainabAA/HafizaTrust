@@ -43,7 +43,6 @@ export class RegisterComponent {
       next: (res) => {
         document.cookie = `token=${res.token}`
         this.router.navigate(['/']);
-        console.log(res);
       },
       error: (error) => {
         console.error(error);

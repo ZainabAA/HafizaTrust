@@ -35,13 +35,11 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
 
       document.cookie = `token=${res.token}`
         this._router.navigate(['/']);
-        console.log(res);
       
     })
   }
