@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { roleGuard } from './guards/role.guard';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -14,7 +15,6 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./pages/auth/register/register.component').then(c => c.RegisterComponent)
     },
-    // { path: 'notes', component: NotesComponent },
     // { path: 'notes/:id', component: NoteDetailsComponent },
     {
         path: 'user',
@@ -29,10 +29,10 @@ export const routes: Routes = [
                 path: 'transactions',
                 loadComponent: () => import('./pages/user/transactions-list/transactions-list.component').then(c => c.TransactionsListComponent)
             },
-            // {
-            //     path: 'beneficiaries',
-            //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
-            // },
+            {
+                path: 'beneficiaries',
+                loadComponent: () => import('./pages/user/beneficiaries/beneficiaries.component').then(c => c.BeneficiariesComponent)
+            },
             // {
             //     path: 'profile',
             //     loadChildren: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent)
@@ -46,6 +46,11 @@ export const routes: Routes = [
             //     loadChildren: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
             // },
         ]
+    },
+    {
+        path: 'admin',
+        canActivate:[authGuard,roleGuard],
+        loadComponent: () => import('./pages/admin/admin.component').then(c => c.AdminComponent)
     },
     {
         path: '**',

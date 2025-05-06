@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient } from '@angular/common/http';
 import { PostRequest, PostResponse, Transaction } from '../../data/transaction';
-import { catchError, throwError } from 'rxjs';
+import { catchError, Observable, throwError, map } from 'rxjs';
+import { Beneficiary } from '../../data/beneficiary';
 
 @Injectable({
   providedIn: 'root'

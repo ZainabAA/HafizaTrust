@@ -25,22 +25,25 @@ export class LoginComponent {
   loginForm!: FormGroup;
 
   private _authService = inject(AuthService);
-  private _router = inject(Router)
+  private router = inject(Router)
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     });
   }
 
   onSubmit() {
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
-
       document.cookie = `token=${res.token}`
-        this._router.navigate(['/']);
-      
+      document.cookie = `username=${this.loginForm.get('username')?.value}`;
+      this.router.navigate(['/admin']);
     })
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 }

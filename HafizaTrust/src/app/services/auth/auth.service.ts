@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import { Injectable } from '@angular/core';
 
 // @Injectable({
@@ -9,6 +10,9 @@
 // }
 
 import { inject, Injectable } from '@angular/core';
+=======
+import { Injectable } from '@angular/core';
+>>>>>>> e2b5ded888163e9447f76b81f81568809e727467
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { BaseService } from '../base/base.service';

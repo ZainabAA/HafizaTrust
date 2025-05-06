@@ -1,0 +1,14 @@
+@for (beneficiary of beneficiaries; track $index) {
+    <mat-accordion>
+        <mat-expansion-panel hideToggle class="card-item">
+          <mat-expansion-panel-header class="expansion-header">
+            <mat-panel-title>{{beneficiary.username}}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="desc">
+            <mat-panel-description>{{beneficiary._id}}</mat-panel-description>
+            <button mat-raised-button (click)="transfer()">Transfer</button>
+            <!-- <img src="{{beneficiary.image}}" /> -->
+          </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+}
