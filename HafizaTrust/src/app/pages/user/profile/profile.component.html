@@ -1,0 +1,8 @@
+@if (user()) {
+    <div class="profile">
+        <h1>Welcome {{user()?.username}}</h1>
+        <p>you current balance is: {{user()?.balance}}</p>
+        <img src="{{image()}}" />
+        <button mat-raised-button (click)="updateImage()">Update image</button>
+    </div>
+}

@@ -4,3 +4,12 @@ export interface User {
     balance: number;
     _id: string;
 }
+
+export interface ImageInput {
+    image: string;
+}
+
+export interface UserUpdateResponse {
+    message: string;
+    fields: ImageInput;
+}
