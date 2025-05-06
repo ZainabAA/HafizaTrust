@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { PopupService } from '../../../services/popup/popup.service';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +26,7 @@ export class RegisterComponent {
   selectedImage: File | null = null;
   @Output() closed = new EventEmitter<void>();
 
+  private _popupService = inject(PopupService);
   constructor(private fb: FormBuilder, private authService: AuthService,
     private router: Router
   ) {
@@ -47,10 +49,13 @@ export class RegisterComponent {
   
     this.authService.register(formData).subscribe({
       next: (res) => {
-        document.cookie = `token=${res.token}`;
-        this.router.navigate(['/user']);
+        this._popupService.toast("Login successful!")
+        document.cookie = `token=${res.token}`
+      document.cookie = `username=${this.registerForm.get('username')?.value}`;
+      this.router.navigate(['/admin']);
       },
       error: (err) => {
+        this._popupService.toast("Login failed", false)
         console.error(err);
       },
     });
