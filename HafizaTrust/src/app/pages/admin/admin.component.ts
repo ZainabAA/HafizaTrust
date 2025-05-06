@@ -15,6 +15,7 @@ import {
 } from '@angular/material/dialog';
 import { TransactionsService } from '../../services/transactions/transactions.service';
 import { InputType, ModalComponent } from '../../components/modal/modal/modal.component';
+import { PopupService } from '../../services/popup/popup.service';
 
 export interface PeriodicElement {
   name: string;
@@ -40,6 +41,8 @@ export class AdminComponent {
 
   readonly depositAmount = model(0);
   readonly dialog = inject(MatDialog);
+  private _popupService = inject(PopupService);
+
   transactionsService = inject(TransactionsService);
   depositInput = [
     {
@@ -76,10 +79,10 @@ export class AdminComponent {
               next: (res) => {
                 this.depositAmount.set(0);
                 console.log(res);
-                
+                this._popupService.toast("Deposit successful", true)
               },
               error: (error) => {
-                console.log(error);
+                this._popupService.toast("Transaction failed", false)
               }
             });
         }
