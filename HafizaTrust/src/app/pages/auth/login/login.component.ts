@@ -27,7 +27,7 @@ export class LoginComponent {
   private _authService = inject(AuthService);
   private router = inject(Router)
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -35,7 +35,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
       document.cookie = `token=${res.token}`
