@@ -38,15 +38,9 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
-<<<<<<< HEAD
-
-      this.router.navigateByUrl('/user')
-=======
       document.cookie = `token=${res.token}`
       document.cookie = `username=${this.loginForm.get('username')?.value}`;
       this.router.navigate(['/admin']);
-      console.log(res);
->>>>>>> d80c13aeaca6c94d35502b6cdf60cb83d8394677
     })
   }
 
