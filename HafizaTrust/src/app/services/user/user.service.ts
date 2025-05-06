@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../../data/user';
+import { ImageInput, User, UserUpdateResponse } from '../../data/user';
 import { catchError, Observable, throwError, map } from 'rxjs';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class UserService extends BaseService {
   }
 
   getCurrent() {
-    return this.get<User[]>(`${this.baseUrl}me`, {}, this.headerAuth)
+    return this.get<User>(`${this.baseUrl}me`, {}, this.headerAuth)
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
@@ -61,4 +61,13 @@ export class UserService extends BaseService {
   );
 }
 
+  updateUser(image: string) {
+    return this.put<UserUpdateResponse, ImageInput>(`${this.baseUrl}profile`, {'image': `${image}`}, {}, this.headerAuth)
+        .pipe(
+          catchError((error) => {
+            console.error('updateUser failed:', error);
+            return throwError(() => error);
+          })
+      );
+  }
 }
