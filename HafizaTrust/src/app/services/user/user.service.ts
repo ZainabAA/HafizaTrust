@@ -45,4 +45,20 @@ export class UserService extends BaseService {
           })
       );
   }
+
+  addUser(user: { username: string }) {
+  return this._http.post<User>(
+    `${this.baseUrl}users`,
+    user,
+    {
+      headers: this.headerAuth
+    }
+  ).pipe(
+    catchError((error) => {
+      console.error('addUser failed:', error);
+      return throwError(() => error);
+    })
+  );
+}
+
 }

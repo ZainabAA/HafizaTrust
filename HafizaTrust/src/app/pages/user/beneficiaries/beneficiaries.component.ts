@@ -87,4 +87,53 @@ export class BeneficiariesComponent {
       }
     });
   }
-}
+
+  addNewBenefeciery(){
+        const dialogRef = this.dialog.open(ModalComponent, {
+          data: [
+            {
+              dataName: 'username',
+              dataType: 'text',
+              data: ''
+            },
+            {
+              dataName: 'amount',
+              dataType: 'number',
+              data: 0
+            }
+          ]
+        });
+      
+        dialogRef.afterClosed().subscribe((result: InputType[]) => {
+          if (result !== undefined) {
+            const username = result.find(d => d.dataName === 'username')?.data;
+            const amount = result.find(d => d.dataName === 'amount')?.data;
+      
+            if (username && amount > 0) {
+              this.transactionsService.transfer(amount, username).subscribe({
+                next: () => {
+                  this.transferAmount.set(0);
+                  console.log('New beneficiary added via transfer');
+                  this.refreshData();
+                },
+                error: (err) => {
+                  console.error('Transfer failed:', err);
+                }
+              });
+            }
+          }
+        });
+      }
+
+      refreshData() {
+        this.transactionsService.getTransactions().subscribe({
+          next: (res) => this.transactions.set(res),
+          error: (err) => console.log(err)
+        });
+      
+        this.usersService.getAllUsers().subscribe({
+          next: (res) => this.users.set(res),
+          error: (err) => console.log(err)
+        });
+      }
+  }
