@@ -27,7 +27,7 @@ export class LoginComponent {
   private _authService = inject(AuthService);
   private router = inject(Router)
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -41,7 +41,10 @@ export class LoginComponent {
       document.cookie = `token=${res.token}`
       document.cookie = `username=${this.loginForm.get('username')?.value}`;
       this.router.navigate(['/admin']);
-      console.log(res);
     })
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 }
