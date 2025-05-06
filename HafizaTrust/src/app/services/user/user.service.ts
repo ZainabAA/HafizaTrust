@@ -3,14 +3,14 @@ import { BaseService } from '../base/base.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../data/user';
 import { catchError, Observable, throwError, map } from 'rxjs';
-
+import {getToken} from '../../guards/auth.guard';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends BaseService {
   baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/auth/';
-  headerAuth = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODExZDYxOGE1ZmJjOGRmZTZhOTI0ODYiLCJpYXQiOjE3NDU5OTkzODQsImV4cCI6MTc1NjM2NzM4NH0.kLfoZLkC0omkVZhxXN7Jo8dLp-v3wAQ6p4VWObyiJ6A'}
-  username = 'zainab';
+  headerAuth = {'Authorization': `Bearer ${getToken('token')}`}
+  username = getToken('username');
 
   constructor(_httpClient: HttpClient) {
       super(_httpClient)
@@ -37,7 +37,7 @@ export class UserService extends BaseService {
   }
 
   getCurrent() {
-    return this.get<User[]>(`${this.baseUrl}me`, {}, this.headerAuth)
+    return this.get<User>(`${this.baseUrl}me`, {}, this.headerAuth)
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
