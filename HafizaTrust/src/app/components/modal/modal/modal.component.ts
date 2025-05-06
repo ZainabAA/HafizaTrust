@@ -24,7 +24,7 @@ export interface InputType {
   selector: 'app-modal',
   standalone: true,
   imports: [MatButtonModule,
-    MatDialogTitle,
+    // MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose, MatFormFieldModule, FormsModule, MatInputModule],
@@ -40,7 +40,6 @@ export class ModalComponent<T> {
 
   constructor() {
     console.log(this.inputModel);
-    
   }
   beneficiaries = [
     {

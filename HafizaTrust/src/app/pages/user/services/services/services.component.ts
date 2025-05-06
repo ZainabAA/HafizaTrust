@@ -20,10 +20,11 @@ import { TransactionsService } from '../../../../services/transactions/transacti
   standalone: true,
   imports: [MatGridListModule, RouterModule,
     MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose],
+    // MatDialogTitle,
+    // MatDialogContent,
+    // MatDialogActions,
+    // MatDialogClose
+  ],
   templateUrl: './services.component.html',
   styleUrl: './services.component.css'
 })
@@ -119,18 +120,6 @@ export class ServicesComponent {
 }
   ]
 
-  transferInput = [
-    {dataName: 'username',
-      dataType: 'select',
-      options: this.beneficiaries.map(b => b.username),
-      data: this.transferUsername()
-    },
-    {dataName: 'amount',
-      dataType: 'number',
-      data: this.transferAmount()
-    }
-  ]
-
   withdrawnput = [
     {
       dataName: 'amount',
@@ -139,25 +128,28 @@ export class ServicesComponent {
     }
   ]
 
-  transfer(){
+  transfer(beneficiary: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: this.transferInput,
+      data: [
+        {
+          dataName: 'amount',
+          dataType: 'number',
+          data: this.transferAmount()
+        }
+      ]
     });
-
+  
     dialogRef.afterClosed().subscribe((result: InputType[]) => {
       console.log('The dialog was closed');
       if (result !== undefined) {
-        let usernameRes = result.filter(data => data.dataName === 'username')[0].data;
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
-
+  
         this.transferAmount.set(amountRes);
-        this.transferUsername.set(usernameRes);
-
-        this.transactionsService.transfer(this.transferAmount(), this.transferUsername())
+  
+        this.transactionsService.transfer(this.transferAmount(), beneficiary.username)
           .subscribe({
             next: (res) => {
               this.transferAmount.set(0);
-              this.transferUsername.set('');
             },
             error: (error) => {
               console.log(error);
