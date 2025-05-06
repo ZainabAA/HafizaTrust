@@ -40,9 +40,12 @@ export class LoginComponent {
     
     this._authService.login(this.loginForm.value).subscribe({
       next:(res)=>{
+        
         this._popupService.toast("Login successful!")
         document.cookie = `token=${res.token}`
         document.cookie = `username=${this.loginForm.get('username')?.value}`;
+        console.log(document.cookie);
+        
         this.router.navigate(['/admin']);
       },
       error:(err)=>{

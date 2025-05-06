@@ -4,15 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { PostRequest, PostResponse, Transaction } from '../../data/transaction';
 import { catchError, Observable, throwError, map } from 'rxjs';
 import { Beneficiary } from '../../data/beneficiary';
-
+import { getToken } from '../../guards/auth.guard';
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionsService extends BaseService {
 
   baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/transactions/';
-  headerAuth = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODExZDYxOGE1ZmJjOGRmZTZhOTI0ODYiLCJpYXQiOjE3NDU5OTkzODQsImV4cCI6MTc1NjM2NzM4NH0.kLfoZLkC0omkVZhxXN7Jo8dLp-v3wAQ6p4VWObyiJ6A'}
-  username = 'zainab';
+  headerAuth = {'Authorization': `Bearer ${getToken('token')}`}
+  username = getToken('username');
 
   constructor(_httpClient: HttpClient) {
     super(_httpClient)
@@ -29,7 +29,7 @@ export class TransactionsService extends BaseService {
    }
 
    withdraw(amount: number){
-    return this.put<PostResponse, PostRequest>(`${this.baseUrl}withdraw`, {amount: amount}, {}, this.headerAuth)
+    return this.put<PostResponse, PostRequest>(`${this.baseUrl}withdraw`, {amount: +amount}, {}, this.headerAuth)
     .pipe(
       catchError((error) => {
         console.error('withdraw failed:', error);
