@@ -11,6 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from '../../../../components/modal/modal/modal.component';
 import { InputType } from '../../../../components/modal/modal/modal.component';
 import { TransactionsService } from '../../../../services/transactions/transactions.service';
+import { PopupService } from '../../../../services/popup/popup.service';
 
 @Component({
   selector: 'app-services',
@@ -29,6 +30,7 @@ export class ServicesComponent {
   readonly transferUsername = model('');
   readonly withdrawAmount = model(0);
   readonly dialog = inject(MatDialog);
+  private _popupService = inject(PopupService);
   transactionsService = inject(TransactionsService);
 
   beneficiaries = [
@@ -170,10 +172,15 @@ export class ServicesComponent {
     });
 
     dialogRef.afterClosed().subscribe((result: InputType[]) => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
+        
         this.withdrawAmount.set(amountRes);
+        /* Current balance must be retrieved using user service */
+        // if(this.withdrawAmount() > {{Current Balnace}} )
+        //   {
+        //   this._popupService.toast("Insufficient balance!", false);
+        //   }
         
         this.transactionsService.withdraw(this.withdrawAmount())
           .subscribe({

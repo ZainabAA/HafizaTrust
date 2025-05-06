@@ -1,7 +1,9 @@
-.buttons{
+/* .buttons{
     padding: 10px;
     display: flex;
     justify-content: flex-end;
+    background-color: white;
+    height: 40vh;
 }
 .buttons button{
     margin: 10px;
@@ -14,4 +16,4 @@
 .footer{
     height: 30vh;
     background-color: var(--secondary-color);
-}
+} */

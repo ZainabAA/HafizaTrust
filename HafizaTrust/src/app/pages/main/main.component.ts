@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -10,5 +11,8 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
   styleUrl: './main.component.css'
 })
 export class MainComponent {
+
+    private _authService = inject(AuthService);
+ 
 
 }

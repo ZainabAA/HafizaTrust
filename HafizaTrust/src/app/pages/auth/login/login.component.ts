@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card'
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { PopupService } from '../../../services/popup/popup.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
 
   private _authService = inject(AuthService);
   private router = inject(Router)
+  private _popupService = inject(PopupService);
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
@@ -35,13 +37,22 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
     
-    this._authService.login(this.loginForm.value).subscribe(res=>{
-      document.cookie = `token=${res.token}`
-      document.cookie = `username=${this.loginForm.get('username')?.value}`;
-      this.router.navigate(['/admin']);
-      console.log(res);
+    this._authService.login(this.loginForm.value).subscribe({
+      next:(res)=>{
+        this._popupService.toast("Login successful!")
+        document.cookie = `token=${res.token}`
+        document.cookie = `username=${this.loginForm.get('username')?.value}`;
+        this.router.navigate(['/admin']);
+      },
+      error:(err)=>{
+          this._popupService.toast("Login failed", false)
+      }
+      
     })
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 }
