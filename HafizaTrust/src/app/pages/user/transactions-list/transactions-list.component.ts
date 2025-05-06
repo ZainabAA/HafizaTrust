@@ -9,6 +9,7 @@ import {MatSelect, MatSelectModule} from '@angular/material/select';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TransactionsService } from '../../../services/transactions/transactions.service';
 import { Transaction } from '../../../data/transaction';
+import { PopupService } from '../../../services/popup/popup.service';
 
 @Component({
   selector: 'app-transactions-list',
@@ -24,6 +25,7 @@ export class TransactionsListComponent {
   transactionsService = inject(TransactionsService);
   transactions: Transaction[] = [];
   filteredTransactions: Transaction[] = [];
+  private _popupService = inject(PopupService);
 
   constructor() {
     this.transactionsService.getTransactions()
@@ -34,7 +36,7 @@ export class TransactionsListComponent {
         },
         error: (error) => {
           console.log(error);
-          
+          this._popupService.toast("Error while retrieveing transactions", false)
         }
       })
   }
