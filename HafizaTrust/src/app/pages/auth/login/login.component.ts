@@ -38,8 +38,7 @@ export class LoginComponent {
     
     this._authService.login(this.loginForm.value).subscribe(res=>{
 
-      console.log(res);
-      
+      this.router.navigateByUrl('/user')
     })
   }
 

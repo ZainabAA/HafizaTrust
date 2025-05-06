@@ -3,18 +3,33 @@
       <h2 class="text-xl font-bold mb-4">Register</h2>
       <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
 
-        <label for="username">User Name:</label>
-        <input formControlName="username" placeholder="example: Hafiza" class="mb-3 w-full p-2 border rounded" />
-        <app-form-error [control]="registerForm.get('username')" fieldName="username"></app-form-error>
-        
-        <label for="password">Password:</label>
-        <input formControlName="password" type="password" placeholder="for example: 1@Hfz5332" class="mb-3 w-full p-2 border rounded" />
-        <app-form-error [control]="registerForm.get('password')" fieldName="Password"></app-form-error>
-
-        <label for="image">Image:</label>
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="mb-3 w-full p-2 border rounded" />
-        
-        <button type="submit" [disabled]="registerForm.invalid" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Register</button>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput
+                 formControlName="username"
+                 required>
+          @if (registerForm.get('username')?.invalid) {
+            <mat-error>Please enter a username</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput
+                 formControlName="password"
+                 required>
+          @if (registerForm.get('password')?.invalid) {
+            <mat-error>Please enter a password</mat-error>
+          }
+        </mat-form-field>
+         <mat-form-field>
+          <mat-label>Profile image</mat-label>
+          <input matInput
+                 formControlName="image">
+          @if (registerForm.get('image')?.invalid) {
+            <mat-error>Please upload an image</mat-error>
+          }
+        </mat-form-field>
+        <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Register</button>
         <button type="button" (click)="navigateToHome()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded w-full">Cancel</button>
     </form>
     </div>

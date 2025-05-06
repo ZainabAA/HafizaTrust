@@ -48,7 +48,7 @@ export class RegisterComponent {
     this.authService.register(formData).subscribe({
       next: (res) => {
         document.cookie = `token=${res.token}`;
-        this.router.navigate(['/']);
+        this.router.navigate(['/user']);
       },
       error: (err) => {
         console.error(err);
