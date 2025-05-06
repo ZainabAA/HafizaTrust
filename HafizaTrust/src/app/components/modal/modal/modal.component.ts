@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 
 export interface InputType {
   dataName: string;
@@ -27,7 +28,8 @@ export interface InputType {
     // MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose, MatFormFieldModule, FormsModule, MatInputModule],
+    CommonModule,
+    MatDialogClose, MatFormFieldModule, FormsModule, MatInputModule, TitleCasePipe],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })
@@ -118,6 +120,14 @@ export class ModalComponent<T> {
   ]
   // readonly amount = model(this.data.amount);
   // readonly username = model(this.data.username);
+
+  isFormInvalid(): boolean {
+    return this.inputModel().some((i: InputType) =>
+      i.data === '' ||
+      i.data === null ||
+      (i.dataName === 'amount' && i.data < 0)
+    );
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
