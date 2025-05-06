@@ -1,8 +1,20 @@
-import {ViewChild, AfterViewInit, Component, effect, inject, signal} from '@angular/core';
+import {ViewChild, AfterViewInit, Component, effect, 
+  inject, signal, model} from '@angular/core';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../data/user';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { TransactionsService } from '../../services/transactions/transactions.service';
+import { InputType, ModalComponent } from '../../components/modal/modal/modal.component';
 
 export interface PeriodicElement {
   name: string;
@@ -26,6 +38,18 @@ export class AdminComponent {
   usersData = signal<User[]>([]);
   dataSource = new MatTableDataSource<User>([]);
 
+  readonly depositAmount = model(0);
+  readonly dialog = inject(MatDialog);
+  transactionsService = inject(TransactionsService);
+  depositInput = [
+    {
+      dataName: 'amount',
+      dataType: 'number',
+      data: this.depositAmount()
+    }
+  ]
+  displayedColumns: string[] = ['id', 'username', 'balance', 'image'];
+
   usersEffect = effect(() => {
     this.usersService.getAllUsers().subscribe({
       next: (res) => {
@@ -35,8 +59,30 @@ export class AdminComponent {
       }
     })
   })
-  
-  isImageError = false;
-  displayedColumns: string[] = ['id', 'username', 'balance', 'image'];
 
+  deposit() {
+      const dialogRef = this.dialog.open(ModalComponent, {
+        data: this.depositInput,
+      });
+  
+      dialogRef.afterClosed().subscribe((result: InputType[]) => {
+        console.log('The dialog was closed');
+        if (result !== undefined) {
+          let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
+          this.depositAmount.set(amountRes);
+          
+          this.transactionsService.deposit(this.depositAmount())
+            .subscribe({
+              next: (res) => {
+                this.depositAmount.set(0);
+                console.log(res);
+                
+              },
+              error: (error) => {
+                console.log(error);
+              }
+            });
+        }
+      });
+    }
 }

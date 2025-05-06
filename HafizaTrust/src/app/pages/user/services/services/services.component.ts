@@ -1,13 +1,10 @@
 import { Component, inject, model, signal } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
+import { MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
