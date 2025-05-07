@@ -1,6 +1,6 @@
 import { Component, effect, inject, signal, model } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
-import { User } from '../../../data/user';
+import { User } from '../../../interfaces/user';
 import { getToken } from '../../../interceptors/auth.interceptor';
 
 @Component({

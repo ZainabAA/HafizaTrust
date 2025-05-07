@@ -2,7 +2,7 @@ import { Component, effect, inject, model, signal } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from '../../services/auth/auth.service';
 import { getToken } from '../../guards/auth.guard';
-import { User } from '../../data/user';
+import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 
