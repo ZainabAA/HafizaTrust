@@ -16,6 +16,7 @@ import {
 import { TransactionsService } from '../../services/transactions/transactions.service';
 import { InputType, ModalComponent } from '../../components/modal/modal/modal.component';
 import { PopupService } from '../../services/popup/popup.service';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -42,6 +43,7 @@ export class AdminComponent {
   readonly depositAmount = model(0);
   readonly dialog = inject(MatDialog);
   private _popupService = inject(PopupService);
+  private _router = inject(Router)
 
   transactionsService = inject(TransactionsService);
   depositInput = [
@@ -51,7 +53,7 @@ export class AdminComponent {
       data: this.depositAmount()
     }
   ]
-  displayedColumns: string[] = ['id', 'username', 'balance', 'image'];
+  displayedColumns: string[] = ['id', 'username', 'balance', 'Action'];
 
   usersEffect = effect(() => {
     this.usersService.getAllUsers().subscribe({
@@ -88,4 +90,15 @@ export class AdminComponent {
         }
       });
     }
+
+    logout()
+  {
+    document.cookie = "";
+    document.cookie.replace('token', '');
+    document.cookie.replace('username', '')
+    console.log(document.cookie);
+    
+    this._router.navigateByUrl('/')
+    
+  }
 }
