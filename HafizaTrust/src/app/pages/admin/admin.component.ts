@@ -51,7 +51,7 @@ export class AdminComponent {
       data: this.depositAmount()
     }
   ]
-  displayedColumns: string[] = ['id', 'username', 'balance', 'image'];
+  displayedColumns: string[] = ['id', 'username', 'balance', 'action'];
 
   usersEffect = effect(() => {
     this.usersService.getAllUsers().subscribe({
