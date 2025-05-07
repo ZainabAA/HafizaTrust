@@ -17,7 +17,7 @@ import { PopupService } from '../../../services/popup/popup.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, FormErrorComponent, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
