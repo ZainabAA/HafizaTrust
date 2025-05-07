@@ -1,10 +1,10 @@
 import { Component, effect, inject, signal, model } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { TransactionsService } from '../../../services/transactions/transactions.service';
-import { Beneficiary } from '../../../data/beneficiary';
+import { Beneficiary } from '../../../interfaces/beneficiary';
 import { UserService } from '../../../services/user/user.service';
-import { Transaction } from '../../../data/transaction';
-import { User } from '../../../data/user';
+import { Transaction } from '../../../interfaces/transaction';
+import { User } from '../../../interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { InputType, ModalComponent } from '../../../components/modal/modal/modal.component';
 

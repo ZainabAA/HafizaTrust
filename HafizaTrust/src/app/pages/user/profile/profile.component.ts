@@ -1,6 +1,6 @@
 import { Component, effect, inject, signal, model } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
-import { User, UserUpdateResponse } from '../../../data/user';
+import { User, UserUpdateResponse } from '../../../interfaces/user';
 import { getToken } from '../../../guards/auth.guard';
 import { InputType, ModalComponent } from '../../../components/modal/modal/modal.component';
 import { MatDialog,

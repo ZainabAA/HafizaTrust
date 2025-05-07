@@ -2,7 +2,7 @@ import {ViewChild, AfterViewInit, Component, effect,
   inject, signal, model} from '@angular/core';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { UserService } from '../../services/user/user.service';
-import { User } from '../../data/user';
+import { User } from '../../interfaces/user';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {
   MAT_DIALOG_DATA,

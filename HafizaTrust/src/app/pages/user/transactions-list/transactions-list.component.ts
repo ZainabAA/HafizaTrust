@@ -8,7 +8,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect, MatSelectModule} from '@angular/material/select';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TransactionsService } from '../../../services/transactions/transactions.service';
-import { Transaction } from '../../../data/transaction';
+import { Transaction } from '../../../interfaces/transaction';
 import { PopupService } from '../../../services/popup/popup.service';
 
 @Component({
