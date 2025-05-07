@@ -6,6 +6,13 @@ import { AuthRequest, AuthResponse } from '../../interfaces/auth/auth';
 import { Router } from '@angular/router';
 import { SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
 
+// function setCookie(name, value, exdays) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//   let expires = "expires="+ d.toUTCString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// }
+
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
   private readonly baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/auth';
@@ -32,13 +39,12 @@ export class AuthService extends BaseService {
 
   logout()
   {
-    document.cookie = "";
-    document.cookie.replace('token', '');
-    document.cookie.replace('username', '')
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
     console.log(document.cookie);
     
     this._router.navigateByUrl('/')
-    
   }
 
   register(data: FormData): Observable<AuthResponse> {

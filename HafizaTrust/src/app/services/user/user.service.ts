@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { ImageInput, User, UserUpdateResponse } from '../../data/user';
+import { ImageInput, User, UserUpdateResponse } from '../../interfaces/user';
 import { catchError, Observable, throwError, map } from 'rxjs';
 import { getToken, SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
 

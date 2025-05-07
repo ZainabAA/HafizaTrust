@@ -49,13 +49,13 @@ export class RegisterComponent {
   
     this.authService.register(formData).subscribe({
       next: (res) => {
-        this._popupService.toast("Login successful!")
+        this._popupService.toast("Register successful!")
         document.cookie = `token=${res.token}`
-      document.cookie = `username=${this.registerForm.get('username')?.value}`;
-      this.router.navigate(['/admin']);
+        document.cookie = `username=${this.registerForm.get('username')?.value}`;
+        this.router.navigate(['/admin']);
       },
       error: (err) => {
-        this._popupService.toast("Login failed", false)
+        this._popupService.toast("Registeration failed", false)
         console.error(err);
       },
     });

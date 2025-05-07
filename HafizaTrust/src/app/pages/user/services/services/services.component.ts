@@ -13,7 +13,7 @@ import { InputType } from '../../../../components/modal/modal/modal.component';
 import { TransactionsService } from '../../../../services/transactions/transactions.service';
 import { PopupService } from '../../../../services/popup/popup.service';
 import { UserService } from '../../../../services/user/user.service';
-import { User } from '../../../../data/user';
+import { User } from '../../../../interfaces/user';
 
 @Component({
   selector: 'app-services',

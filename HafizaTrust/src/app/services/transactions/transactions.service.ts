@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient } from '@angular/common/http';
-import { PostRequest, PostResponse, Transaction } from '../../data/transaction';
+import { PostRequest, PostResponse, Transaction } from '../../interfaces/transaction';
 import { catchError, Observable, throwError, map } from 'rxjs';
-import { Beneficiary } from '../../data/beneficiary';
 import { getToken } from '../../interceptors/auth.interceptor';
 
 @Injectable({
