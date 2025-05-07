@@ -30,8 +30,14 @@ export class TransactionsListComponent {
   constructor() {
     this.transactionsService.getTransactions()
       .subscribe({
-        next: (res) => {
+        next: (res: Transaction[]) => {
+
           this.transactions = res;
+          this.transactions.map(t => {
+            t.createdAt = new Date(t.createdAt)
+            t.updatedAt = new Date(t.updatedAt)
+            return t
+          })
           this.filteredTransactions = this.transactions;
         },
         error: (error) => {
