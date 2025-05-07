@@ -11,6 +11,7 @@ import { TransactionsService } from '../../../services/transactions/transactions
 import { Transaction } from '../../../interfaces/transaction';
 import { PopupService } from '../../../services/popup/popup.service';
 import { UserService } from '../../../services/user/user.service';
+import { getToken } from '../../../interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-transactions-list',
@@ -27,11 +28,13 @@ export class TransactionsListComponent {
   transactionsService = inject(TransactionsService);
   private _popupService = inject(PopupService);
   usersService = inject(UserService);
+  user: string | null;
 
   transactions: Transaction[] = [];
   filteredTransactions: Transaction[] = [];
 
   constructor() {
+    this.user = getToken('username')
     this.transactionsService.getTransactions()
       .subscribe({
         next: (res: Transaction[]) => {

@@ -1,6 +1,6 @@
 export interface Transaction {
     _id: string,
-    type: 'transfer' | 'deposit',
+    type: 'transfer' | 'deposit' | 'withdraw',
     amount: number,
     from: string,
     to: string,
