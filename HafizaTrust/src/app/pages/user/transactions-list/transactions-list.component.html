@@ -30,9 +30,9 @@
         </form>
 @for (transaction of filteredTransactions; track $index) {
     <mat-accordion>
-        <mat-expansion-panel hideToggle class="card-item">
+        <mat-expansion-panel class="card-item">
           <mat-expansion-panel-header class="expansion-header">
-            <mat-panel-title>{{transaction.amount}}</mat-panel-title>
+            <mat-panel-title>{{transaction.amount | currency: 'KWD' }}</mat-panel-title>
             <mat-panel-description>{{transaction.createdAt | date: 'shortDate'}}</mat-panel-description>
             <p>{{transaction.type}}</p>
           </mat-expansion-panel-header>

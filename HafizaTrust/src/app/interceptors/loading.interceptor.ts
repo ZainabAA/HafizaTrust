@@ -10,7 +10,6 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoadingService)
     // Check for a custom attribute 
     // to avoid showing loading spinner
-    console.log(req.context.get(SKIP_LOADING));
     
     if (req.context.get(SKIP_LOADING)) {
       // Pass the request directly to the next handler

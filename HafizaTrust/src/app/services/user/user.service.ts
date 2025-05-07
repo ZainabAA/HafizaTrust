@@ -31,7 +31,7 @@ export class UserService extends BaseService {
   }
 
   getUsersById(id: string){
-    return this.get<User[]>(`${this.baseUrl}user/${id}`,
+    return this.get<User>(`${this.baseUrl}user/${id}`,
       {
         context: new HttpContext().set(SKIP_INTERCEPT, true)
       })
