@@ -38,7 +38,11 @@ export class AuthService extends BaseService {
 
   logout()
   {
-    document.cookie = "token=;"
+    document.cookie = "";
+    document.cookie.replace('token', '');
+    document.cookie.replace('username', '')
+    console.log(document.cookie);
+    
     this._router.navigateByUrl('/login')
     
   }

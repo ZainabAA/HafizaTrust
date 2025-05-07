@@ -12,6 +12,8 @@ import { ModalComponent } from '../../../../components/modal/modal/modal.compone
 import { InputType } from '../../../../components/modal/modal/modal.component';
 import { TransactionsService } from '../../../../services/transactions/transactions.service';
 import { PopupService } from '../../../../services/popup/popup.service';
+import { UserService } from '../../../../services/user/user.service';
+import { User } from '../../../../data/user';
 
 @Component({
   selector: 'app-services',
@@ -32,7 +34,14 @@ export class ServicesComponent {
   readonly withdrawAmount = model(0);
   readonly dialog = inject(MatDialog);
   private _popupService = inject(PopupService);
+  private _userService = inject(UserService);
   transactionsService = inject(TransactionsService);
+   user: User = {
+     username: '',
+     image: '',
+     balance: 0,
+     _id: ''
+   };
 
   beneficiaries = [
     {
@@ -119,11 +128,32 @@ export class ServicesComponent {
 }
   ]
 
+  constructor(){
+     this._userService.getCurrent().subscribe((res)=>{
+        this.user = res;
+        console.log(res);
+        
+        
+        
+    })
+  }
+  transferInput = [
+    {dataName: 'username',
+      dataType: 'select',
+      options: this.beneficiaries.map(b => b.username),
+      data: this.transferUsername()
+    },
+    {dataName: 'amount',
+      dataType: 'number',
+      data: this.transferAmount()
+    }
+  ]
+
   withdrawnput = [
     {
       dataName: 'amount',
       dataType: 'number',
-      data: this.withdrawAmount()
+      data: this.withdrawAmount(),
     }
   ]
 
@@ -139,21 +169,33 @@ export class ServicesComponent {
     });
   
     dialogRef.afterClosed().subscribe((result: InputType[]) => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
   
         this.transferAmount.set(amountRes);
   
         this.transactionsService.transfer(this.transferAmount(), beneficiary.username)
+
+        if(this.transferAmount() > this.user.balance)
+        {
+            this._popupService.toast("Insufficient balance!", false)
+        }else{
+          this.transactionsService.transfer(this.transferAmount(), this.transferUsername())
           .subscribe({
             next: (res) => {
+              this._popupService.toast("Transfer completed!")
+
               this.transferAmount.set(0);
             },
             error: (error) => {
               console.log(error);
+              this._popupService.toast("Transfer failed!", false)
+
             }
           });
+        }
+          
+        
       }
     });
   }
@@ -161,6 +203,7 @@ export class ServicesComponent {
   withdraw() {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: this.withdrawnput,
+
     });
 
     dialogRef.afterClosed().subscribe((result: InputType[]) => {
@@ -168,23 +211,30 @@ export class ServicesComponent {
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
         
         this.withdrawAmount.set(amountRes);
-        /* Current balance must be retrieved using user service */
-        // if(this.withdrawAmount() > {{Current Balnace}} )
-        //   {
-        //   this._popupService.toast("Insufficient balance!", false);
-        //   }
-        
-        this.transactionsService.withdraw(this.withdrawAmount())
+        if(this.withdrawAmount() > this.user.balance )
+        {
+          this._popupService.toast("Insufficient balance!", false);
+        }
+        else{
+          
+          this.transactionsService.withdraw(this.withdrawAmount())
           .subscribe({
             next: (res) => {
               this.withdrawAmount.set(0);
               console.log(res);
+              this._popupService.toast("Withdrawal succeeded!");
+
               
             },
             error: (error) => {
+              this._popupService.toast("Withdrawal failed!", false)
+
               console.log(error);
             }
           });
+        }
+        
+        
       }
     });
   }
