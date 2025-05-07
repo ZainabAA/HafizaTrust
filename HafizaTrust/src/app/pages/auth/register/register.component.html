@@ -1,37 +1,50 @@
-   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="closeModal()">
+   <!-- <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="closeModal()">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm" (click)="$event.stopPropagation()">
-      <h2 class="text-xl font-bold mb-4">Register</h2>
-      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <h2 class="text-xl font-bold mb-4"></h2> -->
+      <mat-card class="col-12 px-5 py-3">
+        <mat-card-title>
+          Register
+        </mat-card-title>
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="d-flex flex-column justify-content-center">
 
-        <mat-form-field>
-          <mat-label>Username</mat-label>
-          <input matInput
-                 formControlName="username"
-                 required>
-          @if (registerForm.get('username')?.invalid) {
-            <mat-error>Please enter a username</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput
-                 formControlName="password"
-                 required>
-          @if (registerForm.get('password')?.invalid) {
-            <mat-error>Please enter a password</mat-error>
-          }
-        </mat-form-field>
-         <mat-form-field>
-          <mat-label>Profile image</mat-label>
-          <input matInput
-                 formControlName="image">
-          @if (registerForm.get('image')?.invalid) {
-            <mat-error>Please upload an image</mat-error>
-          }
-        </mat-form-field>
-        <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Register</button>
-        <button type="button" (click)="navigateToHome()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded w-full">Cancel</button>
-    </form>
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput
+                   formControlName="username"
+                   required>
+            @if (registerForm.get('username')?.invalid) {
+              <mat-error>Please enter a username</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput
+                   formControlName="password"
+                   required>
+            @if (registerForm.get('password')?.invalid) {
+              <mat-error>Please enter a password</mat-error>
+            }
+          </mat-form-field>
+           <mat-form-field>
+            <mat-label>Profile image</mat-label>
+            <input matInput
+                   formControlName="image">
+            @if (registerForm.get('image')?.invalid) {
+              <mat-error>Please upload an image</mat-error>
+            }
+          </mat-form-field>
+          <div class="d-flex flex-column">
+            <div>
+              <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary" class="w-100">Register</button>
+              <button type="button" (click)="navigateToHome()" mat-button class="w-100">Cancel</button>
+            </div>
+          </div>
+         
+      </form>
+      </mat-card>
+<!--       
     </div>
-  </div>
+  </div> -->
+  <p>Already have an account? <a routerLink="/login">Login here</a></p>
+
   
