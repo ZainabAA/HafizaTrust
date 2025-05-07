@@ -43,7 +43,7 @@ export class AuthService extends BaseService {
     document.cookie.replace('username', '')
     console.log(document.cookie);
     
-    this._router.navigateByUrl('/login')
+    this._router.navigateByUrl('/')
     
   }
 
