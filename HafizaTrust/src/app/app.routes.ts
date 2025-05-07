@@ -15,7 +15,6 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./pages/auth/register/register.component').then(c => c.RegisterComponent)
     },
-    // { path: 'notes/:id', component: NoteDetailsComponent },
     {
         path: 'user',
         loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent),

@@ -1,7 +1,6 @@
 import { Component, effect, inject, signal, model } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { User, UserUpdateResponse } from '../../../interfaces/user';
-import { getToken } from '../../../guards/auth.guard';
 import { InputType, ModalComponent } from '../../../components/modal/modal/modal.component';
 import { MatDialog,
   MatDialogActions,
@@ -10,6 +9,7 @@ import { MatDialog,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { PopupService } from '../../../services/popup/popup.service';
+import { getToken } from '../../../interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-profile',

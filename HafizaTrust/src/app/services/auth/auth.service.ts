@@ -1,19 +1,10 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
-
-//   constructor() { }
-// }
-
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { BaseService } from '../base/base.service';
 import { AuthRequest, AuthResponse } from '../../interfaces/auth/auth';
 import { Router } from '@angular/router';
+import { SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
@@ -27,7 +18,10 @@ export class AuthService extends BaseService {
   login(data: AuthRequest): Observable<AuthResponse> {
     return this.post<AuthResponse, AuthRequest>(
       `${this.baseUrl}/login`,
-      data
+      data,
+      {
+        context: new HttpContext().set(SKIP_INTERCEPT, true)
+      }
     ).pipe(
       catchError((error) => {
         console.error('Login failed:', error);
@@ -50,7 +44,10 @@ export class AuthService extends BaseService {
   register(data: FormData): Observable<AuthResponse> {
     return this.post<AuthResponse, FormData>(
       `${this.baseUrl}/register`,
-      data
+      data,
+      {
+        context: new HttpContext().set(SKIP_INTERCEPT, true)
+      }
     ).pipe(
       catchError((error) => {
         console.error('Registration failed:', error);
