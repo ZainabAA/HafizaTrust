@@ -132,9 +132,6 @@ export class ServicesComponent {
      this._userService.getCurrent().subscribe((res)=>{
         this.user = res;
         console.log(res);
-        
-        
-        
     })
   }
   transferInput = [

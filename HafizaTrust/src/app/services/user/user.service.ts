@@ -4,6 +4,7 @@ import { HttpClient, HttpContext } from '@angular/common/http';
 import { ImageInput, User, UserUpdateResponse } from '../../interfaces/user';
 import { catchError, Observable, throwError, map } from 'rxjs';
 import { getToken, SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
+import { SKIP_LOADING } from '../../interceptors/loading.interceptor';
 
 
 @Injectable({
@@ -11,7 +12,6 @@ import { getToken, SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
 })
 export class UserService extends BaseService {
   baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/auth/';
-  headerAuth = {'Authorization': `Bearer ${getToken('token')}`}
 
   constructor(_httpClient: HttpClient) {
       super(_httpClient)
@@ -31,7 +31,10 @@ export class UserService extends BaseService {
   }
 
   getUsersById(id: string){
-    return this.get<User[]>(`${this.baseUrl}user/${id}`)
+    return this.get<User[]>(`${this.baseUrl}user/${id}`,
+      {
+        context: new HttpContext().set(SKIP_INTERCEPT, true)
+      })
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
@@ -41,7 +44,10 @@ export class UserService extends BaseService {
   }
 
   getCurrent() {
-    return this.get<User>(`${this.baseUrl}me`)
+    return this.get<User>(`${this.baseUrl}me`,
+      {
+        context: new HttpContext().set(SKIP_LOADING, true)
+      })
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
@@ -53,10 +59,7 @@ export class UserService extends BaseService {
   addUser(user: { username: string }) {
   return this._http.post<User>(
     `${this.baseUrl}users`,
-    user,
-    {
-      headers: this.headerAuth
-    }
+    user
   ).pipe(
     catchError((error) => {
       console.error('addUser failed:', error);
