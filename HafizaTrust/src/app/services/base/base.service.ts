@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class BaseService {
-  constructor(private readonly _http: HttpClient) {}
+  constructor(protected _http: HttpClient) {}
+  
 
   get<ResponseType>(url: string, params?: any, headers?: any) {
     return this._http.get<ResponseType>(url, { params, headers });

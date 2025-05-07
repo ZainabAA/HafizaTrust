@@ -20,10 +20,11 @@ import { User } from '../../../../interfaces/user';
   standalone: true,
   imports: [MatGridListModule, RouterModule,
     MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose],
+    // MatDialogTitle,
+    // MatDialogContent,
+    // MatDialogActions,
+    // MatDialogClose
+  ],
   templateUrl: './services.component.html',
   styleUrl: './services.component.css'
 })
@@ -156,18 +157,24 @@ export class ServicesComponent {
     }
   ]
 
-  transfer(){
+  transfer(beneficiary: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: this.transferInput,
+      data: [
+        {
+          dataName: 'amount',
+          dataType: 'number',
+          data: this.transferAmount()
+        }
+      ]
     });
-
+  
     dialogRef.afterClosed().subscribe((result: InputType[]) => {
       if (result !== undefined) {
-        let usernameRes = result.filter(data => data.dataName === 'username')[0].data;
         let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
-
+  
         this.transferAmount.set(amountRes);
-        this.transferUsername.set(usernameRes);
+  
+        this.transactionsService.transfer(this.transferAmount(), beneficiary.username)
 
         if(this.transferAmount() > this.user.balance)
         {
@@ -176,10 +183,9 @@ export class ServicesComponent {
           this.transactionsService.transfer(this.transferAmount(), this.transferUsername())
           .subscribe({
             next: (res) => {
-              this._popupService.toast("Transfere completed!")
+              this._popupService.toast("Transfer completed!")
 
               this.transferAmount.set(0);
-              this.transferUsername.set('');
             },
             error: (error) => {
               console.log(error);
