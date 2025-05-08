@@ -26,8 +26,10 @@ export class HeaderComponent {
   isLoggedIn = signal<boolean>(false);
 
   constructor() {
-    const token = getToken('token');
-    this.isLoggedIn.set(!!token);
+    effect(() => {
+      const token = getToken('token');
+      this.isLoggedIn.set(!!token);
+    });
 
     const storedUsername = getToken('username');
     this.username.set(storedUsername);
@@ -57,5 +59,6 @@ export class HeaderComponent {
   logout() {
     localStorage.removeItem('homeRoute');
     this._authService.logout();
+    this.isLoggedIn.set(false);
   }
 }
