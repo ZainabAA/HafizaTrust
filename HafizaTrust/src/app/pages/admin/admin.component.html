@@ -1,15 +1,4 @@
-<div class="mat-elevation-z8">
-
-  <header class="flex items-center justify-between p-4 bg-white shadow">
-    <div class="header-item left-0">
-        <img src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F24%2FLEGO_logo.svg%2F2048px-LEGO_logo.svg.png&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ALEGO_logo.svg&docid=XgHpjgAOTTz7vM&tbnid=98sIiHgutLgy1M&vet=12ahUKEwjC7q3Z6IGNAxXjQ6QEHeqSCgsQM3oECC0QAA..i&w=2048&h=2048&hcb=2&ved=2ahUKEwjC7q3Z6IGNAxXjQ6QEHeqSCgsQM3oECC0QAA" />
-        <h1>Hafiza Trust</h1>
-    </div>
-    <p>ADMIN</p>
-    <div class="space-x-4 header-item">
-        <button mat-raised-button (click)="logout()">Logout</button>
-    </div>
-</header>
+<div class="mat-elevation-z8 main">
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -40,7 +29,7 @@
       <th mat-header-cell *matHeaderCellDef> Action </th>
       
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button (click)="deposit()">Deposit</button>
+        <button mat-raised-button color="accent" (click)="deposit()">Deposit</button>
       </td>
     </ng-container>
   
@@ -50,6 +39,7 @@
   <mat-paginator [pageSizeOptions]="[5, 20, 50]"
                  #paginator
                  showFirstLastButtons
-                 aria-label="Select page of periodic elements">
+                 aria-label="Select page of periodic elements"
+                 class="paginator">
   </mat-paginator>
 </div>

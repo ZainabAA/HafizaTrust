@@ -17,6 +17,8 @@ import { TransactionsService } from '../../services/transactions/transactions.se
 import { InputType, ModalComponent } from '../../components/modal/modal/modal.component';
 import { PopupService } from '../../services/popup/popup.service';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth/auth.service';
 
 export interface PeriodicElement {
   name: string;
@@ -29,7 +31,7 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -37,16 +39,29 @@ export class AdminComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   usersService = inject(UserService);
+  authService = inject(AuthService);
   usersData = signal<User[]>([]);
   dataSource = new MatTableDataSource<User>([]);
 
   readonly depositAmount = model(0);
+  readonly depositUsername = model('');
+  readonly depositPassword = model('');
   readonly dialog = inject(MatDialog);
   private _popupService = inject(PopupService);
   private _router = inject(Router)
 
   transactionsService = inject(TransactionsService);
   depositInput = [
+    {
+    dataName: 'username',
+    dataType: 'text',
+    data: this.depositUsername()
+    },
+    {
+    dataName: 'password',
+    dataType: 'text',
+    data: this.depositPassword()
+  },
     {
       dataName: 'amount',
       dataType: 'number',
@@ -75,18 +90,31 @@ export class AdminComponent {
         if (result !== undefined) {
           let amountRes = result.filter(data => data.dataName === 'amount')[0].data;
           this.depositAmount.set(amountRes);
+          let userRes = result.filter(data => data.dataName === 'username')[0].data;
+          this.depositUsername.set(userRes);
+          let passwordRes = result.filter(data => data.dataName === 'password')[0].data;
+          this.depositPassword.set(passwordRes);
           
-          this.transactionsService.deposit(this.depositAmount())
-            .subscribe({
-              next: (res) => {
-                this.depositAmount.set(0);
-                console.log(res);
-                this._popupService.toast("Deposit successful", true)
-              },
-              error: (error) => {
-                this._popupService.toast("Transaction failed", false)
-              }
-            });
+          let userToken: string | null = null;
+          console.log(userRes, passwordRes);
+          
+          this.authService.login({username: userRes, password: passwordRes}).subscribe({
+            next: (res) => {
+              userToken = res.token;
+              console.log(userToken);
+              this.transactionsService.deposit(this.depositAmount(), userToken)
+              .subscribe({
+                next: (res) => {
+                  this.depositAmount.set(0);
+                  console.log(res);
+                  this._popupService.toast("Deposit successful", true)
+                },
+                error: (error) => {
+                  this._popupService.toast("Transaction failed", false)
+                }
+              });
+            }
+          });
         }
       });
     }
