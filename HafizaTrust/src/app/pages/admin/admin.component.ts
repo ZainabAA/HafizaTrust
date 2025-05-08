@@ -59,7 +59,7 @@ export class AdminComponent {
     },
     {
     dataName: 'password',
-    dataType: 'text',
+    dataType: 'password',
     data: this.depositPassword()
   },
     {
@@ -110,9 +110,12 @@ export class AdminComponent {
                   this._popupService.toast("Deposit successful", true)
                 },
                 error: (error) => {
-                  this._popupService.toast("Transaction failed", false)
+                  this._popupService.toast("Deposit failed", false)
                 }
               });
+            },
+            error: (error) => {
+              this._popupService.toast("Incorrect username/password", false)
             }
           });
         }
