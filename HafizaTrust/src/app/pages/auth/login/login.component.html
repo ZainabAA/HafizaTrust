@@ -1,5 +1,8 @@
-<mat-card>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+<mat-card class="col-12 px-5 py-3">
+  <mat-card-title>
+    Login
+  </mat-card-title>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-flex flex-column justify-content-center">
     <mat-form-field>
       <mat-label>Username</mat-label>
       <input matInput
@@ -19,10 +22,15 @@
         <mat-error>Please enter your password</mat-error>
       }
     </mat-form-field>
-
-    <button type="submit" [disabled]="loginForm.invalid" mat-raised-button color="primary">Login</button>
-    <button type="button" (click)="navigateToHome()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded w-full">Cancel</button>
+    <div class="d-flex flex-column">
+      <div>
+        <button type="submit" [disabled]="loginForm.invalid" mat-raised-button class="primary" class="w-100">Login</button>
+    <button type="button" (click)="navigateToHome()" mat-button class="w-100">Cancel</button>
+      </div>
+    </div>
+    
   </form>
 </mat-card>
+<p>Don't have an account? <a routerLink="/register">Register here</a></p>
 
   

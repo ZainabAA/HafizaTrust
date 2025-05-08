@@ -1,160 +1,274 @@
 // /* You can add global styles to this file, and also import other style files */
-// @use '@angular/material' as mat;
-// // @use 'm3-theme';
-// // @include mat.core();
+@use '@angular/material' as mat;
+// @use 'm3-theme';
+// @include mat.core();
 
 
-// @import "tailwindcss";
+@import "tailwindcss";
 
-//   $primary: (
-//     50: #000000,
-//     100: #002116,
-//     200: #12372a,
-//     300: #1e4235,
-//     400: #2a4d40,
-//     500: #36594b,
-//     600: #426657,
-//     700: #5a7f6f,
-//     800: #739988,
-//     900: #8db3a2,
-//     A100: #c4ebd9,
-//     A200: #d2fae7,
-//     A300: #e7fff2,
-//     A400: #f4fff7,
-//     100: #ffffff,
-//   );
-//   $secondary: (
-//     0: #000000,
-//     10: #042015,
-//     20: #1a362a,
-//     25: #254134,
-//     30: #314c3f,
-//     35: #3c584b,
-//     40: #486456,
-//     50: #607d6f,
-//     60: #799788,
-//     70: #94b2a2,
-//     80: #aecebc,
-//     90: #caead8,
-//     95: #d8f8e6,
-//     98: #e8fff1,
-//     99: #f4fff7,
-//     100: #ffffff,
-//   );
+  $primary: (
+    50: #000000,
+    100: #002116,
+    200: #12372a,
+    300: #1e4235,
+    400: #2a4d40,
+    500: #36594b,
+    600: #426657,
+    700: #5a7f6f,
+    800: #739988,
+    900: #8db3a2,
+    A100: #c4ebd9,
+    A200: #d2fae7,
+    A300: #e7fff2,
+    A400: #f4fff7,
+    100: #ffffff,
+  );
+  $secondary: (
+    0: #000000,
+    10: #042015,
+    20: #1a362a,
+    25: #254134,
+    30: #314c3f,
+    35: #3c584b,
+    40: #486456,
+    50: #607d6f,
+    60: #799788,
+    70: #94b2a2,
+    80: #aecebc,
+    90: #caead8,
+    95: #d8f8e6,
+    98: #e8fff1,
+    99: #f4fff7,
+    100: #ffffff,
+  );
 
-//   $tertiary: (
-//     0: #000000,
-//     10: #241a08,
-//     20: #3b2e1b,
-//     25: #463925,
-//     30: #52452f,
-//     35: #5f503a,
-//     40: #6b5c45,
-//     50: #85755c,
-//     60: #a08e74,
-//     70: #bba88e,
-//     80: #d8c4a7,
-//     90: #f5dfc2,
-//     95: #ffeed9,
-//     98: #fff8f3,
-//     99: #fffbff,
-//     100: #ffffff,
-//   );
+  $tertiary: (
+    0: #000000,
+    10: #241a08,
+    20: #3b2e1b,
+    25: #463925,
+    30: #52452f,
+    35: #5f503a,
+    40: #6b5c45,
+    50: #85755c,
+    60: #a08e74,
+    70: #bba88e,
+    80: #d8c4a7,
+    90: #f5dfc2,
+    95: #ffeed9,
+    98: #fff8f3,
+    99: #fffbff,
+    100: #ffffff,
+  );
 
-//   $neutral: (
-//     0: #000000,
-//     4: #0d0b08,
-//     6: #13100b,
-//     10: #201b13,
-//     12: #241f17,
-//     17: #2f2a21,
-//     20: #353027,
-//     22: #39342b,
-//     24: #3e392f,
-//     25: #403b31,
-//     30: #4c463c,
-//     35: #585147,
-//     40: #645d53,
-//     50: #7e766b,
-//     60: #989084,
-//     70: #b3aa9e,
-//     80: #cfc5b8,
-//     87: #e3d9cc,
-//     90: #ebe1d4,
-//     92: #f1e7d9,
-//     94: #f7ecde,
-//     95: #faefe1,
-//     96: #fcf2e7,
-//     98: #fff8f2,
-//     99: #fffbff,
-//     100: #ffffff,
-//   );
-//   $neutral-variant: (
-//     0: #000000,
-//     10: #161d1a,
-//     20: #2b322e,
-//     25: #363d39,
-//     30: #414844,
-//     35: #4d5450,
-//     40: #59605c,
-//     50: #717974,
-//     60: #8b928e,
-//     70: #a6ada8,
-//     80: #c1c8c3,
-//     90: #dde4df,
-//     95: #ebf3ed,
-//     98: #f4fbf5,
-//     99: #f7fef8,
-//     100: #ffffff,
-//   );
-//   $error: (
-//     0: #000000,
-//     10: #410002,
-//     20: #690005,
-//     25: #7e0007,
-//     30: #93000a,
-//     35: #a80710,
-//     40: #ba1a1a,
-//     50: #de3730,
-//     60: #ff5449,
-//     70: #ff897d,
-//     80: #ffb4ab,
-//     90: #ffdad6,
-//     95: #ffedea,
-//     98: #fff8f7,
-//     99: #fffbff,
-//     100: #ffffff,
-//   );
+  $neutral: (
+    0: #000000,
+    4: #0d0b08,
+    6: #13100b,
+    10: #201b13,
+    12: #241f17,
+    17: #2f2a21,
+    20: #353027,
+    22: #39342b,
+    24: #3e392f,
+    25: #403b31,
+    30: #4c463c,
+    35: #585147,
+    40: #645d53,
+    50: #7e766b,
+    60: #989084,
+    70: #b3aa9e,
+    80: #cfc5b8,
+    87: #e3d9cc,
+    90: #ebe1d4,
+    92: #f1e7d9,
+    94: #f7ecde,
+    95: #faefe1,
+    96: #fcf2e7,
+    98: #fff8f2,
+    99: #fffbff,
+    100: #ffffff,
+  );
+  $neutral-variant: (
+    0: #000000,
+    10: #161d1a,
+    20: #2b322e,
+    25: #363d39,
+    30: #414844,
+    35: #4d5450,
+    40: #59605c,
+    50: #717974,
+    60: #8b928e,
+    70: #a6ada8,
+    80: #c1c8c3,
+    90: #dde4df,
+    95: #ebf3ed,
+    98: #f4fbf5,
+    99: #f7fef8,
+    100: #ffffff,
+  );
+  $error: (
+    0: #000000,
+    10: #410002,
+    20: #690005,
+    25: #7e0007,
+    30: #93000a,
+    35: #a80710,
+    40: #ba1a1a,
+    50: #de3730,
+    60: #ff5449,
+    70: #ff897d,
+    80: #ffb4ab,
+    90: #ffdad6,
+    95: #ffedea,
+    98: #fff8f7,
+    99: #fffbff,
+    100: #ffffff,
+  );
 
-// $ht-primary: mat.define-palette($primary);
-// $ht-secondary: mat.define-palette($secondary);
-// $ht-tertiary: mat.define-palette($tertiary);
-// $ht-neutral: mat.define-palette($neutral);
-// $ht-neutral-v: mat.define-palette($neutral-variant);
-// $ht-warn: mat.define-palette(mat.$red-palette);
-// $ht-danger: mat.define-palette($error, 70);
+$ht-primary: mat.define-palette($primary);
+$ht-secondary: mat.define-palette($secondary);
+$ht-tertiary: mat.define-palette($tertiary);
+$ht-neutral: mat.define-palette($neutral);
+$ht-neutral-v: mat.define-palette($neutral-variant);
+$ht-warn: mat.define-palette(mat.$red-palette);
+$ht-danger: mat.define-palette($error, 70);
 
-// $colors: 0,10,20,25,30,35,40,50,60,70.80,90,95,98,99,100;
-// @each $color in $colors{
-//     .primary-#{$color}
-//     {
-//         background-color: mat.get-color-from-palette($ht-primary, $color) !important; 
-//     }
-//     .txt-primary-#{$color}{
-//         color: mat.get-color-from-palette($ht-primary, $color) !important
-//     }
-//     .secondary-#{$color}{
-//         background-color: mat.get-color-from-palette($ht-secondary, $color)
-//     }
-//     .txt-secondary-#{$color}{
-//         color: mat.get-color-from-palette($ht-secondary, $color)
-//     }
-// }
+$colors: 0,10,20,25,30,35,40,50,60,70.80,90,95,98,99,100;
+@each $color in $colors{
+    .primary-#{$color}
+    {
+        background-color: mat.get-color-from-palette($ht-primary, $color) !important; 
+    }
+    .txt-primary-#{$color}{
+        color: mat.get-color-from-palette($ht-primary, $color) !important
+    }
+    .secondary-#{$color}{
+        background-color: mat.get-color-from-palette($ht-secondary, $color)
+    }
+    .txt-secondary-#{$color}{
+        color: mat.get-color-from-palette($ht-secondary, $color)
+    }
+}
 
+$ht-theme: mat.define-light-theme((
+  color: (
+    primary: $ht-primary,
+    accent: $ht-secondary,
+    warn: $ht-danger,
+    
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
 
+.alexandria-100 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+  }
 
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  .alexandria-200 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+  }
+  .alexandria-300 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+  .alexandria-400 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .alexandria-500 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+  .alexandria-600 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+  .alexandria-700 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+  .alexandria-800 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+  }
+  .alexandria-900 {
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  .zain-extralight {
+    font-family: "Zain", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .zain-light {
+    font-family: "Zain", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .zain-regular {
+    font-family: "Zain", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .zain-bold {
+    font-family: "Zain", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .zain-extrabold {
+    font-family: "Zain", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .zain-black {
+    font-family: "Zain", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .zain-light-italic {
+    font-family: "Zain", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .zain-regular-italic {
+    font-family: "Zain", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 // button {
 //     background-color: var(--md-sys-color-primary);
