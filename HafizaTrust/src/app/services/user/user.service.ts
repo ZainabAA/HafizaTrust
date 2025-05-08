@@ -1,23 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
-import { HttpClient } from '@angular/common/http';
-import { ImageInput, User, UserUpdateResponse } from '../../data/user';
+import { HttpClient, HttpContext } from '@angular/common/http';
+import { ImageInput, User, UserUpdateResponse } from '../../interfaces/user';
 import { catchError, Observable, throwError, map } from 'rxjs';
-import {getToken} from '../../guards/auth.guard';
+import { getToken, SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
+import { SKIP_LOADING } from '../../interceptors/loading.interceptor';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends BaseService {
   baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/auth/';
-  headerAuth = {'Authorization': `Bearer ${getToken('token')}`}
-  username = getToken('username');
 
   constructor(_httpClient: HttpClient) {
       super(_httpClient)
      }
 
   getAllUsers(){
-    return this.get<User[]>(`${this.baseUrl}users`, {}, this.headerAuth)
+    return this.get<User[]>(`${this.baseUrl}users`,
+          {
+            context: new HttpContext().set(SKIP_INTERCEPT, true)
+          })
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
@@ -27,7 +31,10 @@ export class UserService extends BaseService {
   }
 
   getUsersById(id: string){
-    return this.get<User[]>(`${this.baseUrl}user/${id}`, {}, this.headerAuth)
+    return this.get<User>(`${this.baseUrl}user/${id}`,
+      {
+        context: new HttpContext().set(SKIP_INTERCEPT, true)
+      })
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
@@ -37,7 +44,10 @@ export class UserService extends BaseService {
   }
 
   getCurrent() {
-    return this.get<User>(`${this.baseUrl}me`, {}, this.headerAuth)
+    return this.get<User>(`${this.baseUrl}me`,
+      {
+        context: new HttpContext().set(SKIP_LOADING, true)
+      })
         .pipe(
           catchError((error) => {
             console.error('getAllUsers failed:', error);
@@ -46,8 +56,21 @@ export class UserService extends BaseService {
       );
   }
 
+  addUser(user: { username: string }) {
+  return this._http.post<User>(
+    `${this.baseUrl}users`,
+    user
+  ).pipe(
+    catchError((error) => {
+      console.error('addUser failed:', error);
+      return throwError(() => error);
+    })
+  );
+}
+
   updateUser(image: string) {
-    return this.put<UserUpdateResponse, ImageInput>(`${this.baseUrl}profile`, {'image': `${image}`}, {}, this.headerAuth)
+    return this.put<UserUpdateResponse, ImageInput>(`${this.baseUrl}profile`, 
+      {'image': `${image}`})
         .pipe(
           catchError((error) => {
             console.error('updateUser failed:', error);

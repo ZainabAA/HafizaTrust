@@ -1,4 +1,4 @@
-.profile{
+.home{
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -7,10 +7,10 @@
     font-size: 18px;
 }
 
-/* h1{
+h1{
     font-size: 30px;
     margin: 20px;
-} */
+}
 
 button{
     margin: 20px;
@@ -18,6 +18,6 @@ button{
 
 img {
     margin: 20px;
-    height: 200px;
-    width: auto;
+    height: 100px;
+    width: 100px;
 }

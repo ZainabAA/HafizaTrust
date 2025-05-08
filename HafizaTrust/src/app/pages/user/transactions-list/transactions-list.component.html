@@ -30,16 +30,38 @@
         </form>
 @for (transaction of filteredTransactions; track $index) {
     <mat-accordion>
-        <mat-expansion-panel hideToggle class="card-item">
+        <mat-expansion-panel [hideToggle]="transaction.type != 'transfer'" class="card-item">
           <mat-expansion-panel-header class="expansion-header">
-            <mat-panel-title>{{transaction.amount}}</mat-panel-title>
+            <mat-panel-title>
+                @if((transaction.type === 'transfer' && transaction.from === user)
+                    || transaction.type === 'withdraw'){
+                    -
+                }
+                @else if((transaction.type === 'transfer' && transaction.to === user)
+                    || transaction.type === 'deposit'){
+                    +
+                }
+                {{transaction.amount | currency: 'KWD' }}
+            </mat-panel-title>
             <mat-panel-description>{{transaction.createdAt | date: 'shortDate'}}</mat-panel-description>
-            <p>{{transaction.type}}</p>
+            <div class="transaction">{{transaction.type}}
+                @if(transaction.type === 'transfer'){
+                    <img class="icon" src="/assets/transferIcon.png"/>
+                }
+                @else if(transaction.type === 'deposit'){
+                    <img class="icon" src="/assets/depositIcon.png"/>
+                }
+                @else{
+                    <img class="icon" src="/assets/withdrawIcon.png"/>
+                }
+            </div>
           </mat-expansion-panel-header>
+          @if(transaction.type === 'transfer'){
           <div>
-            <p>from: {{transaction.from}}</p>
-            <p>to: {{transaction.to}}</p>
+                <p>from: {{transaction.from}}</p>
+                <p>to: {{transaction.to}}</p>
           </div>
+        }
         </mat-expansion-panel>
     </mat-accordion>
 }

@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
@@ -8,14 +8,17 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect, MatSelectModule} from '@angular/material/select';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TransactionsService } from '../../../services/transactions/transactions.service';
-import { Transaction } from '../../../data/transaction';
+import { Transaction } from '../../../interfaces/transaction';
 import { PopupService } from '../../../services/popup/popup.service';
+import { UserService } from '../../../services/user/user.service';
+import { getToken } from '../../../interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
   imports: [MatExpansionModule, DatePipe, MatIconModule, MatInputModule,
-    MatDatepickerModule, MatSelectModule, ReactiveFormsModule
+    MatDatepickerModule, MatSelectModule, ReactiveFormsModule,
+    CurrencyPipe
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './transactions-list.component.html',
@@ -23,15 +26,36 @@ import { PopupService } from '../../../services/popup/popup.service';
 })
 export class TransactionsListComponent {
   transactionsService = inject(TransactionsService);
+  private _popupService = inject(PopupService);
+  usersService = inject(UserService);
+  user: string | null;
+
   transactions: Transaction[] = [];
   filteredTransactions: Transaction[] = [];
-  private _popupService = inject(PopupService);
 
   constructor() {
+    this.user = getToken('username')
     this.transactionsService.getTransactions()
       .subscribe({
-        next: (res) => {
+        next: (res: Transaction[]) => {
           this.transactions = res;
+          this.transactions.map(t => {
+            t.createdAt = new Date(t.createdAt)
+            t.updatedAt = new Date(t.updatedAt)
+
+            this.usersService.getUsersById(t.from).subscribe({
+              next: (usr) => {
+                t.from = usr.username
+              }
+            });
+
+            this.usersService.getUsersById(t.to).subscribe({
+              next: (usr) => {
+                t.to = usr.username
+              }
+            });
+            return t
+          })
           this.filteredTransactions = this.transactions;
         },
         error: (error) => {

@@ -15,15 +15,14 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./pages/auth/register/register.component').then(c => c.RegisterComponent)
     },
-    // { path: 'notes/:id', component: NoteDetailsComponent },
     {
         path: 'user',
         loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent),
         canActivate:[authGuard],
         children: [
             {
-                path: 'cards',
-                loadComponent: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent),
+                path: 'home',
+                loadComponent: () => import('./pages/user/home/home.component').then(c => c.HomeComponent),
             },
             {
                 path: 'transactions',
@@ -41,10 +40,6 @@ export const routes: Routes = [
                 path: 'services',
                 loadComponent: () => import('./pages/user/services/services/services.component').then(c => c.ServicesComponent)
             },
-            // {
-            //     path: '**',
-            //     loadChildren: () => import('./pages/user/cards-list/cards-list.component').then(c => c.CardsListComponent)
-            // },
         ]
     },
     {

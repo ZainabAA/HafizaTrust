@@ -7,4 +7,10 @@
 .header-item{
     display: flex;
     align-items: center;
-} */
+}*/
+
+img{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
