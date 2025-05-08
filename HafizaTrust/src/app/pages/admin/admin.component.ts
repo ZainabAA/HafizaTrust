@@ -4,21 +4,15 @@ import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../interfaces/user';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { TransactionsService } from '../../services/transactions/transactions.service';
 import { InputType, ModalComponent } from '../../components/modal/modal/modal.component';
 import { PopupService } from '../../services/popup/popup.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth/auth.service';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 export interface PeriodicElement {
   name: string;
@@ -31,7 +25,7 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, ReactiveFormsModule, MatInputModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -51,6 +45,9 @@ export class AdminComponent {
   private _router = inject(Router)
 
   transactionsService = inject(TransactionsService);
+
+
+  searchForm = new FormControl<string | null>(null);
   depositInput = [
     {
     dataName: 'username',
@@ -79,6 +76,19 @@ export class AdminComponent {
       }
     })
   })
+
+  applySearch() {
+    if (!this.searchForm.value) {
+      this.dataSource.data = this.usersData();
+      return;
+    }
+    console.log(this.usersData()[0]._id.includes(this.searchForm.value ?? ''));
+    
+    this.dataSource.data = this.usersData().filter((usrs) =>
+      (usrs.username?.includes(this.searchForm.value ?? '')
+      || usrs._id?.includes(this.searchForm.value ?? ''))
+    );
+  }
 
   deposit() {
       const dialogRef = this.dialog.open(ModalComponent, {

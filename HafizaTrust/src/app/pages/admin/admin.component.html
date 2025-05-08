@@ -1,5 +1,15 @@
 <div class="mat-elevation-z8 main">
-
+  <form class="form">
+    <mat-form-field>
+        <mat-label>Search User</mat-label>
+        <input [formControl]="searchForm"
+            matInput
+            class="search"
+            #search
+            type="text"
+            (input)="applySearch()"
+        /></mat-form-field>
+</form>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
