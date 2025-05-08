@@ -1,4 +1,4 @@
-import { Component, effect, inject, model, signal } from '@angular/core';
+import { Component, effect, inject, model, output, signal } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from '../../services/auth/auth.service';
 import { getToken } from '../../guards/auth.guard';
@@ -8,11 +8,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatIconModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatIconModule, MatSidenavModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -24,6 +25,8 @@ export class HeaderComponent {
     username = signal<string | null>('');
     readonly image = model('');
     readonly dialog = inject(MatDialog);
+    sidenavEvent = output<boolean>();
+    showFiller = false;
 
   constructor() {
     this.username.set(getToken('username'));
@@ -52,6 +55,12 @@ export class HeaderComponent {
   logout()
   {
     this._authService.logout()
+  }
+
+  toggleSideNav()
+  {
+    this.showFiller = !this.showFiller
+    this.sidenavEvent.emit(this.showFiller)
   }
 
 }

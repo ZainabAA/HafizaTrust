@@ -3,12 +3,24 @@
     <div class="d-flex flex-column justify-content-center align-items-center h-100">
       <div class="w-100">
         
-        <app-header></app-header>
+        <app-header (sidenavEvent)="drawer.toggle()"></app-header>
+      </div>
+      <mat-drawer-container class="example-container w-100" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
+          <a class="profile-link" routerLink="./profile">username1 <mat-icon class="pt-1">edit</mat-icon></a>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a> 
+        </mat-drawer>
+        <div class="example-sidenav-content">
+          <div >  
+            <router-outlet></router-outlet>
+          </div>
+        </div>
         
-      </div>
-      <div >  
-        <router-outlet></router-outlet>
-      </div>
+      
+      </mat-drawer-container>
+      
     </div>
   </div>
   <app-loader></app-loader>
