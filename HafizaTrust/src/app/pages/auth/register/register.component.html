@@ -12,17 +12,21 @@
             <input matInput
                    formControlName="username"
                    required>
-            @if (registerForm.get('username')?.invalid) {
+            @if (registerForm.get('username')?.errors?.['required']) {
               <mat-error>Please enter a username</mat-error>
             }
           </mat-form-field>
           <mat-form-field>
             <mat-label>Password</mat-label>
             <input matInput
+                  type="password"
                    formControlName="password"
                    required>
-            @if (registerForm.get('password')?.invalid) {
+            @if (registerForm.get('password')?.errors?.['required']) {
               <mat-error>Please enter a password</mat-error>
+            }
+            @else {
+              <mat-error>Password minimum length is 8</mat-error>
             }
           </mat-form-field>
            <mat-form-field>
