@@ -30,9 +30,13 @@
         </form>
 @for (transaction of filteredTransactions; track $index) {
     <mat-accordion>
-        <mat-expansion-panel [hideToggle]="transaction.type != 'transfer'" class="card-item">
+        <mat-expansion-panel [hideToggle]="transaction.type != 'transfer'"
+         class="card-item">
           <mat-expansion-panel-header class="expansion-header">
-            <mat-panel-title>
+            <mat-panel-title 
+                [style.color]="(transaction.type === 'deposit' 
+                || transaction.type === 'transfer' && transaction.from === user)? 'red': 
+                'green'">
                 @if((transaction.type === 'transfer' && transaction.from === user)
                     || transaction.type === 'withdraw'){
                     -
@@ -43,18 +47,23 @@
                 }
                 {{transaction.amount | currency: 'KWD' }}
             </mat-panel-title>
-            <mat-panel-description>{{transaction.createdAt | date: 'shortDate'}}</mat-panel-description>
-            <div class="transaction">{{transaction.type}}
-                @if(transaction.type === 'transfer'){
-                    <img class="icon" src="/assets/transferIcon.png"/>
-                }
-                @else if(transaction.type === 'deposit'){
-                    <img class="icon" src="/assets/depositIcon.png"/>
-                }
-                @else{
-                    <img class="icon" src="/assets/withdrawIcon.png"/>
-                }
-            </div>
+            <mat-panel-description class="panel-desc"
+                [style.color]="(transaction.type === 'deposit' 
+                || transaction.type === 'transfer' && transaction.from === user)? 'red': 
+                'green'">
+                {{transaction.createdAt | date: 'shortDate'}}
+                <div class="transaction">{{transaction.type}}
+                    @if(transaction.type === 'transfer'){
+                        <img class="icon" src="/assets/transferIcon.png"/>
+                    }
+                    @else if(transaction.type === 'deposit'){
+                        <img class="icon" src="/assets/depositIcon.png"/>
+                    }
+                    @else{
+                        <img class="icon" src="/assets/withdrawIcon.png"/>
+                    }
+                </div>
+            </mat-panel-description>
           </mat-expansion-panel-header>
           @if(transaction.type === 'transfer'){
           <div>

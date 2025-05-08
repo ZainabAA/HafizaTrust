@@ -14,6 +14,11 @@
     margin-bottom: 10px;
 }
 
+.panel-desc{
+    display: flex;
+    justify-content: space-around;
+}
+
 .transaction {
     display: flex;
 }
