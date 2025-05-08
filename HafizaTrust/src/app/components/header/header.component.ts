@@ -5,6 +5,7 @@ import { getToken } from '../../guards/auth.guard';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  private router = inject(Router);
   private _authService = inject(AuthService);
   user = signal<User | null>(null);
   username1: string = '';
@@ -46,8 +48,15 @@ export class HeaderComponent {
     }
   })
   
+  goHome()
+  {
+    const route = localStorage.getItem('homeRoute') || '/user'; // fallback route
+    this.router.navigateByUrl(route);
+  }
+
   logout()
   {
+    localStorage.removeItem('homeRoute');
     this._authService.logout()
   }
 
