@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PostRequest, PostResponse, Transaction } from '../../interfaces/transaction';
 import { catchError, Observable, throwError, map } from 'rxjs';
 import { getToken } from '../../interceptors/auth.interceptor';
@@ -36,8 +36,10 @@ export class TransactionsService extends BaseService {
     )
    }
 
-   deposit(amount: number){
-    return this.put<PostResponse, PostRequest>(`${this.baseUrl}deposit`, {amount: amount}, {})
+   deposit(amount: number, customToken?: string){
+    return this.put<PostResponse, PostRequest>(`${this.baseUrl}deposit`, {amount: amount}, 
+      {}, customToken? new HttpHeaders({
+        Authorization: `Bearer ${customToken}`,}) : {})
     .pipe(
       catchError((error) => {
         console.error('deposit failed:', error);

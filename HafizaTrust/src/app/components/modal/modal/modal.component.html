@@ -26,17 +26,8 @@
         {{ input.dataName | titlecase }}
         <span *ngIf="['username', 'amount'].includes(input.dataName)" class="text-red-600"></span>
       </mat-label>
-
-      @if (input.dataType === 'text') {
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="input.data"
-          required
-        />
-      }
-
-      @else if (input.dataType === 'number') {
+      
+      @if (input.dataType === 'number') {
         <input
           matInput
           type="number"
@@ -60,6 +51,15 @@
             <option [value]="opt">{{ opt }}</option>
           }
         </select>
+      }
+
+      @else {
+        <input
+          matInput
+          type="{{input.dataType}}"
+          [(ngModel)]="input.data"
+          required
+        />
       }
     </mat-form-field>
   }

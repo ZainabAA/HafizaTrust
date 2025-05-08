@@ -8,17 +8,19 @@
         <p>username</p>
         <button mat-raised-button (click)="logout()">Logout</button>
     </div> -->
-    <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
-        <div>
-            <img src="{{ image() }}" />
+    @if(user){
+        <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
+            <div>
+                <img src="{{ user?.image }}" />
+            </div>
+            <div>
+                <h2 class="m-0"> {{ user?.username }}  </h2>
+            </div>
+            
         </div>
-        <div>
-            <h2 class="m-0"> {{ username1 }}  </h2>
-        </div>
-        
-    </div>
+    }
     <!-- <div >
-        <button mat-button>Login</button>
+       <button mat-button>Login</button>
         <button mat-raised-button (click)="logout()">Logout</button>
     </div> -->
 </header>

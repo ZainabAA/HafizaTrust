@@ -8,11 +8,12 @@ import { User } from '../../../interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { InputType, ModalComponent } from '../../../components/modal/modal/modal.component';
 import { PopupService } from '../../../services/popup/popup.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-beneficiaries',
   standalone: true,
-  imports: [MatExpansionModule],
+  imports: [MatExpansionModule, MatButtonModule],
   templateUrl: './beneficiaries.component.html',
   styleUrl: './beneficiaries.component.css'
 })

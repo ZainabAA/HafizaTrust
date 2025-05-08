@@ -17,35 +17,23 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   private router = inject(Router);
   private _authService = inject(AuthService);
-  user = signal<User | null>(null);
-  username1: string = '';
+  user: User | null = null;
   usersService = inject(UserService);
-    username = signal<string | null>('');
-    readonly image = model('');
-    readonly dialog = inject(MatDialog);
+  readonly dialog = inject(MatDialog);
 
-  constructor() {
-    this.username.set(getToken('username'));
-    if(this.username()){
+  usersEffect = effect(() => {
+    if(this._authService.$userToken() != null) {
+      console.log(this._authService.$userToken());
+      
       this.usersService.getCurrent().subscribe({
         next: (res) => {  
-            this.user.set(res)
-            this.image.set(this.user()?.image ?? '')
+            console.log(res);
+            this.user = res;
           }
       })
     }
-  }
-  
-  ngOnInit(): void {
-    const username = getToken('username');
-    this.username1 = username || ' ';
-  }
-
-  usersEffect = effect(() => {
-    console.log(this.user());
-    if(this.user()?.image){
-      this.image.set(this.user()?.image ?? '');
-    }
+    else
+      this.user = null
   })
   
   goHome()
