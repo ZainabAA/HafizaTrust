@@ -45,7 +45,7 @@ export class LoginComponent {
         document.cookie = `token=${res.token}`
         document.cookie = `username=${this.loginForm.get('username')?.value}`;
         console.log(document.cookie);
-        
+        this._authService.setUser();
         this.router.navigate(['/admin']);
       },
       error:(err)=>{
