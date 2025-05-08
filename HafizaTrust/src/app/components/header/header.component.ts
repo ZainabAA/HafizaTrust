@@ -1,5 +1,5 @@
 import { Component, effect, inject, model, signal } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth/auth.service';
 import { getToken } from '../../guards/auth.guard';
 import { User } from '../../interfaces/user';
@@ -15,37 +15,47 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  private router = inject(Router);
   private _authService = inject(AuthService);
-  user: User | null = null;
-  usersService = inject(UserService);
-  readonly dialog = inject(MatDialog);
+  private router = inject(Router);
+  private usersService = inject(UserService);
+  private dialog = inject(MatDialog);
+
+  user = signal<User | null>(null);
+  username = signal<string | null>(null);
+  readonly image = model('');
+  isLoggedIn = signal<boolean>(false);
+
+  constructor() {
+    const token = getToken('token');
+    this.isLoggedIn.set(!!token);
+
+    const storedUsername = getToken('username');
+    this.username.set(storedUsername);
+
+    if (storedUsername) {
+      this.usersService.getCurrent().subscribe({
+        next: (res) => {
+          this.user.set(res);
+          this.image.set(res.image ?? '');
+        },
+        error: (err) => console.error('Failed to fetch user', err)
+      });
+    }
+  }
 
   usersEffect = effect(() => {
-    if(this._authService.$userToken() != null) {
-      console.log(this._authService.$userToken());
-      
-      this.usersService.getCurrent().subscribe({
-        next: (res) => {  
-            console.log(res);
-            this.user = res;
-          }
-      })
+    if (this.user()?.image) {
+      this.image.set(this.user()?.image ?? '');
     }
-    else
-      this.user = null
-  })
-  
-  goHome()
-  {
-    const route = localStorage.getItem('homeRoute') || '/user'; // fallback route
+  });
+
+  goHome() {
+    const route = localStorage.getItem('homeRoute') || '/user/home';
     this.router.navigateByUrl(route);
   }
 
-  logout()
-  {
+  logout() {
     localStorage.removeItem('homeRoute');
-    this._authService.logout()
+    this._authService.logout();
   }
-
 }

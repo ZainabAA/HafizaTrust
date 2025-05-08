@@ -1,6 +1,6 @@
 <header class="d-flex flex-row align-items-center justify-content-between p-4 primary">
         <div class="d-flex flex-row align-items-center justify-content-center">
-            <img src="/assets/ht-logo.png" (click)="goHome()" class="cursor-pointer" alt="Hafiza Trust Logo"  width="100px" height="auto"/>
+            <img src="/assets/ht-logo.png" (click)="goHome()" [class.opacity-60]="!isLoggedIn()" class="cursor-pointer" alt="Hafiza Trust Logo"  width="100px" height="auto"/>
             <h1 class="zain-bold m-0 mx-3">Hafiza Trust</h1>
         </div>
       
