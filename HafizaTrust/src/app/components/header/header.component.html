@@ -1,21 +1,30 @@
 <header class="d-flex flex-row align-items-center justify-content-between p-4 primary">
-        <div class="d-flex flex-row align-items-center justify-content-center">
-            <img src="/assets/ht-logo.png" alt="Hafiza Trust Logo"  width="100px" height="auto"/>
-            <h1 class="zain-bold m-0 mx-3">Hafiza Trust</h1>
-        </div>
-      
+    <div class="d-flex flex-row align-items-center justify-content-center">
+        
+        <img src="/assets/ht-logo.png" alt="Hafiza Trust Logo" width="100px" height="auto" />
+        <h1 class="zain-bold m-0 mx-3">Hafiza Trust</h1>
+    </div>
+
     <!-- <div>
         <p>username</p>
         <button mat-raised-button (click)="logout()">Logout</button>
     </div> -->
     <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
-        <div>
-            <img src="{{ image() }}" />
-        </div>
-        <div>
-            <h2 class="m-0"> {{ username1 }}  </h2>
-        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ image() }}" />
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li class="dropdown-item"><a class="profile" >{{username1}} <mat-icon class="pt-1">edit</mat-icon></a></li>
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
         
+        
+        
+
     </div>
     <!-- <div >
         <button mat-button>Login</button>

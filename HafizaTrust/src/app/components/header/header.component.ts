@@ -5,11 +5,14 @@ import { getToken } from '../../guards/auth.guard';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatIconModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

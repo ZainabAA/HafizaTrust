@@ -15,3 +15,11 @@
     height: 50px;
     width: 50px;
 } */
+
+a.profile{
+    font-size: 24px;
+}
+
+mat-icon{
+    font-size: 20px;
+}
