@@ -22,7 +22,7 @@ export const roleGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     // Redirect to the login page if the user is not authenticated
-    router.navigate(['/user/home']);
+    router.navigate(['/user']);
     return false;
   }
   
