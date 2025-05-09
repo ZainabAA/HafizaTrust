@@ -4,7 +4,7 @@ import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'main',
         loadComponent: () => import('./pages/main/main.component').then(c => c.MainComponent)
     },
     { 
@@ -21,7 +21,7 @@ export const routes: Routes = [
         canActivate:[authGuard],
         children: [
             {
-                path: 'home',
+                path: '',
                 loadComponent: () => import('./pages/user/home/home.component').then(c => c.HomeComponent),
             },
             {
@@ -40,6 +40,10 @@ export const routes: Routes = [
                 path: 'services',
                 loadComponent: () => import('./pages/user/services/services/services.component').then(c => c.ServicesComponent)
             },
+            {
+                path: '**',
+                loadComponent: () => import('./pages/user/home/home.component').then(c => c.HomeComponent),
+            },
         ]
     },
     {
@@ -49,6 +53,7 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        loadComponent: () => import('./pages/main/main.component').then(c => c.MainComponent)
+        loadComponent: () => import('./pages/user-home/user-home.component').then(c => c.UserHomeComponent),
+        canActivate:[authGuard],
     }
 ];
