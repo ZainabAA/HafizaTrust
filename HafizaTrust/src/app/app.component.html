@@ -1,16 +1,45 @@
-<div>
   <div class="h-100">
     <div class="d-flex flex-column justify-content-center align-items-center h-100">
       <div class="w-100">
         
-        <app-header></app-header>
+        <app-header (sidenavEvent)="drawer.toggle()"></app-header>
+      </div>
+      <mat-drawer-container class="example-container w-100" autosize>
+        <mat-drawer #drawer class="example-sidenav d-fleX" mode="side" position="end">
+          
+
+          <a class="profile-link m-2" routerLink="/user/profile">{{user?.username}}<mat-icon class="pt-1">edit</mat-icon></a>
+          <a class="dropdown-item m-2" routerLink="/user">Home</a>
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
+              <a class="dropdown-item m-2" routerLink="/user/{{node.name}}">{{node.name}}</a>
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <a class="dropdown-item m-2">{{node.name}}</a>
+            </mat-tree-node>
+          </mat-tree> 
+          <button mat-button color="accent" style="font-weight: bold;">Logout<i class="bi bi-box-arrow-left mx-1"></i></button>
+        </mat-drawer>
+        <div class="example-sidenav-content">
+          <div >  
+            <router-outlet></router-outlet>
+          </div>
+        </div>
         
-      </div>
-      <div class="h-100">  
-        <router-outlet class="h-100"></router-outlet>
-      </div>
+      
+      </mat-drawer-container>
+      
     </div>
   </div>
   <app-loader></app-loader>
-</div>
 
