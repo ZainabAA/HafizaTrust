@@ -1,13 +1,17 @@
-<div>
-  <div>
+  <div class="h-100">
     <div class="d-flex flex-column justify-content-center align-items-center h-100">
       <div class="w-100">
         
         <app-header (sidenavEvent)="drawer.toggle()"></app-header>
       </div>
       <mat-drawer-container class="example-container w-100" autosize>
-        <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
-          <a class="profile-link" routerLink="./profile">username1 <mat-icon class="pt-1">edit</mat-icon></a>
+        <mat-drawer #drawer class="example-sidenav d-fleX" mode="side" position="end">
+          <div class="d-flex justify-content-center">
+            <img src="{{ user?.image }}" class="header-item" />
+
+          </div>
+
+          <a class="profile-link" routerLink="./profile">{{user?.username}}<mat-icon class="pt-1">edit</mat-icon></a>
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
           <a class="dropdown-item" href="#">Something else here</a> 
@@ -24,5 +28,4 @@
     </div>
   </div>
   <app-loader></app-loader>
-</div>
 

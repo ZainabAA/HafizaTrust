@@ -1,10 +1,12 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { BaseService } from '../base/base.service';
 import { AuthRequest, AuthResponse } from '../../interfaces/auth/auth';
 import { Router } from '@angular/router';
-import { SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
+import { getToken, SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
+import { User } from '../../interfaces/user';
+import { getTestBed } from '@angular/core/testing';
 
 // function setCookie(name, value, exdays) {
 //   const d = new Date();
@@ -16,10 +18,12 @@ import { SKIP_INTERCEPT } from '../../interceptors/auth.interceptor';
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
   private readonly baseUrl = 'https://react-bank-project.eapi.joincoded.com/mini-project/api/auth';
-  private _router = inject(Router)
+  private _router = inject(Router);
+  readonly $userToken = signal<string | null>(null);
 
   constructor(_http: HttpClient) {
     super(_http);
+    this.$userToken.set(getToken('username'));
   }
 
   login(data: AuthRequest): Observable<AuthResponse> {
@@ -37,11 +41,15 @@ export class AuthService extends BaseService {
     );
   }
 
+  setUser(){
+    this.$userToken.set(getToken('username'));
+  }
+
   logout()
   {
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
+    this.$userToken.set(null);
     console.log(document.cookie);
     
     this._router.navigateByUrl('/')

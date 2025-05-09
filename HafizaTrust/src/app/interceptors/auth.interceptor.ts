@@ -16,6 +16,10 @@ export const SKIP_INTERCEPT = new HttpContextToken(() => false);
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = getToken('token');
   
+  if (req.headers.has('Authorization')) {
+    return next(req);
+  }
+
   if (req.context.get(SKIP_INTERCEPT)) {
     return next(req);
   }

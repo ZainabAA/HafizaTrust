@@ -9,28 +9,17 @@
         <p>username</p>
         <button mat-raised-button (click)="logout()">Logout</button>
     </div> -->
-    <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
-        <button mat-button (click)="toggleSideNav()">
-            <img src="{{ image() }}" />
-        </button>
-        <!-- <div class="dropdown text-center">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ image() }}" />
+    @if(user){
+        <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleSideNav()">
+                <mat-icon>menu</mat-icon>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li class="dropdown-item"><a class="profile-link" routerLink="./profile">{{username1}} <mat-icon class="pt-1">edit</mat-icon></a></li>
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div> -->
-        
-        
-        
-
-    </div>
+            
+            
+        </div>
+    }
     <!-- <div >
-        <button mat-button>Login</button>
+       <button mat-button>Login</button>
         <button mat-raised-button (click)="logout()">Logout</button>
     </div> -->
 </header>
