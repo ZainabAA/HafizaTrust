@@ -51,6 +51,9 @@ export class HeaderComponent {
     this.sidenavEvent.emit(this.showFiller)
   }
 
+  showLogo = signal<boolean>(this.router.url.includes('main'));
+  
+
   logout() {
     this._authService.logout();
     this.router.navigate(['/main'])

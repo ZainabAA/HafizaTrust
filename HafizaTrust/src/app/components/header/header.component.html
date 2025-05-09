@@ -1,7 +1,7 @@
 <header class="d-flex flex-row align-items-center justify-content-between p-4 primary">
     <div class="d-flex flex-row align-items-center justify-content-center">
-        
-        <img src="/assets/ht-logo.png" alt="Hafiza Trust Logo" width="100px" height="auto" />
+
+        <img src="/assets/ht-logo.png" alt="Hafiza Trust Logo" width="100px" height="auto" [hidden]="showLogo()"/>
         <h1 class="zain-bold m-0 mx-3">Hafiza Trust</h1>
     </div>
 
@@ -18,25 +18,32 @@
         <button mat-raised-button (click)="logout()">Logout</button>
     </div> -->
     @if(user){
-      <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
-          <div role="button" (click)="toggleSideNav()">
+    <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
+        <div role="button" (click)="toggleSideNav()">
+
+            <img src="{{ user!.image}}">
             @if(showFiller)
             {
-                <mat-icon>arrow_forward_ios</mat-icon>
+            	<mat-icon>arrow_drop_up</mat-icon>
             }
-            @else 
+            @else
             {
-                <mat-icon>arrow_back_ios</mat-icon>
+            	<mat-icon>arrow_drop_down</mat-icon>
             }
-            
-              <img src="{{ user?.image}}" style="display: inline;"/>
-          </div>
-          
-          
-      </div>
-  }
- <!--  < <div >
-     button mat-button>Login</button>
+        </div>
+
+
+    </div>
+    }
+    @if(!user)
+    {
+        <div>
+            <button [routerLink]="['/login']" routerLinkActive="router-link-active" mat-button >Login</button>
+            <button [routerLink]="['/register']" routerLinkActive="active-button" mat-button>Register</button>
+        </div>
+
+    }
+    <!--  < <div >
      <button mat-raised-button (click)="logout()">Logout</button>
   </div> -->
 </header>

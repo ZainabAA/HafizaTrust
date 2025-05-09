@@ -6,15 +6,13 @@
       </div>
       <mat-drawer-container class="example-container w-100" autosize>
         <mat-drawer #drawer class="example-sidenav d-fleX" mode="side" position="end">
-          <div class="d-flex justify-content-center">
-            <img src="{{ user?.image }}" class="header-item" />
+          
 
-          </div>
-
-          <a class="profile-link" routerLink="./profile">{{user?.username}}<mat-icon class="pt-1">edit</mat-icon></a>
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a> 
+          <a class="profile-link m-2" routerLink="/user/profile">{{user?.username}}<mat-icon class="pt-1">edit</mat-icon></a>
+          <a class="dropdown-item m-2" href="#">Action</a>
+          <a class="dropdown-item m-2" href="#">Another action</a>
+          <a class="dropdown-item m-2" href="#">Something else here</a> 
+          <button mat-button color="accent" style="font-weight: bold;">Logout<i class="bi bi-box-arrow-left mx-1"></i></button>
         </mat-drawer>
         <div class="example-sidenav-content">
           <div >  
