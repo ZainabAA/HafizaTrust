@@ -29,6 +29,7 @@ const TREE_DATA: MenuNode[] = [
 interface ExampleFlatNode {
   expandable: boolean;
   name: string;
+  route?:string;
   level: number;
 }
 
@@ -77,7 +78,7 @@ user: User | null = null;
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
-      level: level,
+     level: level,
     };
   };
 
