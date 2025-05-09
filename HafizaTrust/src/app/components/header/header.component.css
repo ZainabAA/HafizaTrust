@@ -15,30 +15,7 @@
     height: 50px;
     width: 50px;
 } */
-.example-container {
-    width: 500px;
-    height: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+.opacity-60 {
+    opacity: 0.6;
+    pointer-events: none;
   }
-  
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .example-sidenav {
-    padding: 20px;
-  }
-a.profile-link{
-    font-size: 24px;
-}
-
-ul{
-    background: none;
-}
-
-mat-icon{
-    font-size: 20px;
-}

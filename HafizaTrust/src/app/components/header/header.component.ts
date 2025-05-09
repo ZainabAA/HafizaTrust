@@ -9,23 +9,26 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatIconModule, MatSidenavModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatIconModule, MatSidenavModule,RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
   private _authService = inject(AuthService);
+  username = signal<string | null>(null);
+  readonly image = model('');
+  isLoggedIn = signal<boolean>(false);
   user: User | null = null;
   usersService = inject(UserService);
-    username = signal<string | null>('');
-    readonly image = model('');
     readonly dialog = inject(MatDialog);
     sidenavEvent = output<boolean>();
     showFiller = false;
+  router = inject(Router);
 
   usersEffect = effect(() => {
     if(this._authService.$userToken() != null) {
@@ -41,11 +44,6 @@ export class HeaderComponent {
     else
       this.user = null
   })
-  
-  logout()
-  {
-    this._authService.logout()
-  }
 
   toggleSideNav()
   {
@@ -53,4 +51,8 @@ export class HeaderComponent {
     this.sidenavEvent.emit(this.showFiller)
   }
 
+  logout() {
+    this._authService.logout();
+    this.router.navigate(['/main'])
+  }
 }
