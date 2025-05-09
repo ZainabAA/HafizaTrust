@@ -9,9 +9,25 @@
           
 
           <a class="profile-link m-2" routerLink="/user/profile">{{user?.username}}<mat-icon class="pt-1">edit</mat-icon></a>
-          <a class="dropdown-item m-2" href="#">Action</a>
-          <a class="dropdown-item m-2" href="#">Another action</a>
-          <a class="dropdown-item m-2" href="#">Something else here</a> 
+          <a class="dropdown-item m-2" routerLink="/user">Home</a>
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
+              {{node.name}}
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              {{node.name}}
+            </mat-tree-node>
+          </mat-tree> 
           <button mat-button color="accent" style="font-weight: bold;">Logout<i class="bi bi-box-arrow-left mx-1"></i></button>
         </mat-drawer>
         <div class="example-sidenav-content">
