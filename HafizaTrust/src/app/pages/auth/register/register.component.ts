@@ -27,6 +27,7 @@ export class RegisterComponent {
   @Output() closed = new EventEmitter<void>();
 
   private _popupService = inject(PopupService);
+  private _authService = inject(AuthService);
   constructor(private fb: FormBuilder, private authService: AuthService,
     private router: Router
   ) {
@@ -43,8 +44,8 @@ export class RegisterComponent {
     formData.append('username', this.registerForm.get('username')?.value);
     formData.append('password', this.registerForm.get('password')?.value);
   
-    if (this.selectedImage) {
-      formData.append('image', this.selectedImage);
+    if (this.registerForm.get('image')?.valid) {
+      formData.append('image', this.registerForm.get('image')?.value);
     }
   
     this.authService.register(formData).subscribe({
@@ -52,6 +53,7 @@ export class RegisterComponent {
         this._popupService.toast("Register successful!")
         document.cookie = `token=${res.token}`
         document.cookie = `username=${this.registerForm.get('username')?.value}`;
+        this._authService.setUser();
         this.router.navigate(['/admin']);
       },
       error: (err) => {
@@ -85,6 +87,6 @@ export class RegisterComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/main']);
   }
 }

@@ -56,6 +56,6 @@ export class LoginComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/main']);
   }
 }
