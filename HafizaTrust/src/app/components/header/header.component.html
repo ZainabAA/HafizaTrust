@@ -1,9 +1,9 @@
 <header class="d-flex flex-row align-items-center justify-content-between p-4 primary">
         <div class="d-flex flex-row align-items-center justify-content-center">
-            <a routerLink="/main" routerLinkActive="router-link-active">
+            <!-- <a routerLink="/main" routerLinkActive="router-link-active"> -->
               <img src="/assets/ht-logo.png" class="cursor-pointer" 
                 alt="Hafiza Trust Logo"  width="100px" height="auto"/>
-            </a>
+            <!-- </a> -->
             <h1 class="zain-bold m-0 mx-3">Hafiza Trust</h1>
         </div>
 <!-- <div>
@@ -13,10 +13,10 @@
     @if(user){
       <div class="space-x-4 header-item d-flex flex-row align-items-center justify-content-center">
           <div>
-              <img src="{{ user?.image }}" />
+              <img src="{{ user.image }}" />
           </div>
           <div>
-              <h2 class="m-0"> {{ user?.username }}  </h2>
+              <h2 class="m-0"> {{ user.username }}  </h2>
           </div>
           
         <div >

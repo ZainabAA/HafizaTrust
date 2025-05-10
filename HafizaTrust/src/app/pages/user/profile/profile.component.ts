@@ -11,6 +11,7 @@ import { MatDialog,
 import { PopupService } from '../../../services/popup/popup.service';
 import { getToken } from '../../../interceptors/auth.interceptor';
 
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -70,8 +71,9 @@ export class ProfileComponent {
                 this._popupService.toast("Updated successfully", true);
                 this.image.set(res.fields.image ?? '');
                 console.log(this.image());
-                
+                window.location.reload();
               },
+    
               error: (error) => {
                 this._popupService.toast("Error updating", false)
               }
