@@ -1,16 +1,18 @@
-
-<div class="d-flex flex-row justify-content-center p-5">
-    <div class="d-flex flex-row justify-content-center w-50">
-        <img src="/assets/ht-logo.png" size="50% 50%" />     
+<nav>
+    <div class="buttons">
+        <button [routerLink]="['/login']" routerLinkActive="router-link-active" mat-button >Login</button>
+        <button [routerLink]="['/register']" routerLinkActive="active-button" mat-button>Register</button>
     </div>
-    <div class="d-flex flex-column justify-content-start w-50 p-5">
-        <h1>About Us</h1>
-        <h4>
-            At Hafiza Trust, we believe trust is built through care, consistency, and transparency.
-            Inspired by the name Hafiza—“protector”—we’re here to safeguard your finances and support 
-            your goals. Whether you're saving, investing, or growing your business, we offer smart, 
-            secure, and personalized banking every step of the way.
-         </h4>
-    </div>
+</nav>
+<div class="main-content">
+    main
 </div>
-
+<div class="footer">
+    <h1>About Us</h1>
+     <h4>
+        At Hafiza Trust, we believe trust is built through care, consistency, and transparency.
+        Inspired by the name Hafiza—“protector”—we’re here to safeguard your finances and support 
+        your goals. Whether you're saving, investing, or growing your business, we offer smart, 
+        secure, and personalized banking every step of the way.
+     </h4>
+</div>

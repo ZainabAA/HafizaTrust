@@ -10,17 +10,11 @@ import { MatDialog,
 } from '@angular/material/dialog';
 import { PopupService } from '../../../services/popup/popup.service';
 import { getToken } from '../../../interceptors/auth.interceptor';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -31,7 +25,7 @@ export class ProfileComponent {
   readonly image = model('');
   readonly dialog = inject(MatDialog);
   private _popupService = inject(PopupService);
-  
+
   imageInput = [
     {
       dataName: 'image',
@@ -47,11 +41,8 @@ export class ProfileComponent {
         next: (res) => {  
             this.user.set(res)
             this.image.set(this.user()?.image ?? '')
-            
           }
       })
-
-      
     }
   }
 

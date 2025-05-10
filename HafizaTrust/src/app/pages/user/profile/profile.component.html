@@ -1,11 +1,6 @@
 @if (user()) {
-   
     <div class="profile">
-        <div class="position-relative" role="button" (click)="updateImage()">
-            <img src="{{image()}}" />
-                <img src="https://img.icons8.com/fluency-systems-filled/48/edit-image.png" alt="edit-image" class="iconImg position-absolute" style="bottom: 0;"/>
-        </div>
-        <h3>Username: {{user()?.username}}</h3>
-        <!-- <button mat-raised-button (click)="updateImage()">Update image</button> -->
+        <img src="{{image()}}" />
+        <button mat-raised-button (click)="updateImage()">Update image</button>
     </div>
 }

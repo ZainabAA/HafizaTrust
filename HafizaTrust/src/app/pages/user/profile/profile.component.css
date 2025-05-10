@@ -15,13 +15,9 @@
 button{
     margin: 20px;
 }
-img{
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
-}
 
-img.iconImg{
-    height: 28px;
-    width: 28px;
+img {
+    margin: 20px;
+    height: 200px;
+    width: auto;
 }

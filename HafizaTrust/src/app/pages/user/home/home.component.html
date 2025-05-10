@@ -16,35 +16,10 @@
           <span>{{ user()?.username }}</span>
         </div>
       </div>
-      
     </mat-card-content>
   </mat-card>
-  <div class="d-flex flex-row justify-content-center">
-    <mat-card style="max-height: fit-content;" role="button" (click)="withdraw()">
-      <mat-card-header class="w-100">
-        <mat-card-content class="text-center p-0 w-100">
-          <h2>Withdraw</h2>
-        </mat-card-content>
-      </mat-card-header>
-      <img src="/assets/withdraw.png" width="50%" height="auto" class="mt-0"/>
-    </mat-card>
-    <!-- <mat-card role="button">
-      <mat-card-content class="text-center p-0 w-100">
-        <h2>Deposit</h2>
-      </mat-card-content><mat-card-header>
-   
-      </mat-card-header>
-      <img src="/assets/deposit2.png" width="50%" height="auto" class="mt-0"/>
 
-    </mat-card> -->
-    <mat-card role="button" routerLink="/user/beneficiaries" routerLinkActive="router-link-active">
-        <mat-card-content class="text-center p-0 w-100">
-          <h2>Transactions</h2>
-        </mat-card-content>
-      <img src="/assets/transaction.png" width="50%" height="auto" class="mt-0"/>
-
-    </mat-card>
-  </div>
-  
+  <button mat-raised-button><a routerLink="/user/beneficiaries" routerLinkActive="router-link-active">Transfer</a></button>
+    <button mat-raised-button (click)="withdraw()">Withdraw</button>
 </div>
 }
